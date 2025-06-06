@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+  <title>Goal Lumpsum Calculator</title>
+  <style>
+    
+
+    .container {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    input:focus {
+      border-color: #264391;
+    }
+
+    button {
+      width: 100%;
+      background-color: #264391;
+      color: white;
+      padding: 12px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #264391;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      display: none; 
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result p {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .result h3 {
+      color: green;
+      margin-bottom: 12px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div>
+    <nav class="navbar">
+      <div class="logo">FinanceX</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="learnzone.html">LearnZone</a></li>
+        <li><a href="news.html">LiveAnalytics</a></li>
+        <li><a href="filter.html">DecideX</a></li>
+        <li><a href="smartcalc.html">SmartCal-C</a></li>
+        <li><a href="chatbot.html">FinSight</a></li>
+        <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="profile-icon">
+        <div class="dropdown">
+          <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+          <div class="dropdown-content">
+            <a href="#">English</a>
+            <a href="#">Spanish</a>
+            <a href="#">French</a>
+            <a href="#">German</a>
+            <a href="#">Hindi</a>
+          </div>
+        </div>
+        <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile"></a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="parent-container">
+  <div class="container">
+    <h2>Goal Lumpsum Calculator</h2>
+
+    <div class="input-group">
+      <label for="goalValue">Current Value of Your Goal (₹):</label>
+      <input type="number" id="goalValue" placeholder="e.g. 200000">
+    </div>
+
+    <div class="input-group">
+      <label for="expectedReturn">Expected Annual Return (%):</label>
+      <input type="number" id="expectedReturn" placeholder="e.g. 12">
+    </div>
+
+    <div class="input-group">
+      <label for="years">Number of Years to Achieve Goal:</label>
+      <input type="number" id="years" placeholder="e.g. 5">
+    </div>
+
+    <button onclick="calculateGoalLumpsum()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+  </div>
+
+  <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+  <script>
+    function calculateGoalLumpsum() {
+      const goalValue = parseFloat(document.getElementById("goalValue").value);
+      const expectedReturn = parseFloat(document.getElementById("expectedReturn").value);
+      const years = parseInt(document.getElementById("years").value);
+      const inflationRate = 6;
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(goalValue) || isNaN(expectedReturn) || isNaN(years)) {
+        resultDiv.innerHTML = "<p class='error'>Please enter valid numbers in all fields.</p>";
+        resultDiv.classList.add("show");
+        return;
+      }
+
+      const inflationAdjustedGoal = goalValue * Math.pow(1 + inflationRate / 100, years);
+      const lumpsumRequiredToday = inflationAdjustedGoal / Math.pow(1 + expectedReturn / 100, years);
+
+      resultDiv.innerHTML = `
+        <h3>Results</h3>
+        <p><strong>Inflation Adjusted Value of Goal (Future Value):</strong> ₹${Math.round(inflationAdjustedGoal).toLocaleString()}</p>
+        <p><strong>Lumpsum Amount Required Today:</strong> ₹${Math.round(lumpsumRequiredToday).toLocaleString()}</p>
+        <p><strong>Number of Years:</strong> ${years}</p>
+        <p><em>Note: Assumes an average inflation rate of 6%</em></p>
+      `;
+
+      resultDiv.classList.add("show");
+    }
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Retirement Planning Calculator</title>
+  <style>
+    .parent-container {
+      margin: 50px 0px;
+      background: white;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      width: 400px;
+
+    }
+
+    h1 {
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #264391;
+      color: white;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #264391;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .result h3 {
+      color: #264391;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <nav class="navbar">
+      <div class="logo">FinanceX</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="learnzone.html">LearnZone</a></li>
+        <li><a href="news.html">LiveAnalytics</a></li>
+        <li><a href="filter.html">DecideX</a></li>
+        <li><a href="smartcalc.html">SmartCal-C</a></li>
+        <li><a href="chatbot.html">FinSight</a></li>
+        <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="profile-icon">
+        <div class="dropdown">
+          <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+          <div class="dropdown-content">
+            <a href="#">English</a>
+            <a href="#">Spanish</a>
+            <a href="#">French</a>
+            <a href="#">German</a>
+            <a href="#">Hindi</a>
+          </div>
+        </div>
+        <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile"></a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="parent-container">
+    <div class="container">
+      <h1>Retirement Planning Calculator</h1>
+
+      <div class="input-group">
+        <label>Current Age:</label>
+        <input type="number" id="currentAge" placeholder="e.g. 34">
+      </div>
+
+      <div class="input-group">
+        <label>Retirement Age:</label>
+        <input type="number" id="retirementAge" placeholder="e.g. 60">
+      </div>
+
+      <div class="input-group">
+        <label>Life Expectancy:</label>
+        <input type="number" id="lifeExpectancy" placeholder="e.g. 95">
+      </div>
+
+      <div class="input-group">
+        <label>Monthly Expenses (₹):</label>
+        <input type="number" id="monthlyExpense" placeholder="e.g. 15000">
+      </div>
+
+      <div class="input-group">
+        <label>Estimated Expense % After Retirement:</label>
+        <input type="number" id="expensePercent" placeholder="e.g. 80 for 80%">
+      </div>
+
+      <div class="input-group">
+        <label>Inflation Rate (%): <small>(default 6%)</small></label>
+        <input type="number" id="inflationRate" value="6">
+      </div>
+
+      <button onclick="calculateRetirement()">Calculate</button>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+  <script>
+    function calculateRetirement() {
+      const currentAge = parseFloat(document.getElementById("currentAge").value);
+      const retirementAge = parseFloat(document.getElementById("retirementAge").value);
+      const lifeExpectancy = parseFloat(document.getElementById("lifeExpectancy").value);
+      const monthlyExpense = parseFloat(document.getElementById("monthlyExpense").value);
+      const expensePercent = parseFloat(document.getElementById("expensePercent").value);
+      const inflationRate = parseFloat(document.getElementById("inflationRate").value);
+      const resultDiv = document.getElementById("result");
+
+      if (
+        isNaN(currentAge) || isNaN(retirementAge) || isNaN(lifeExpectancy) ||
+        isNaN(monthlyExpense) || isNaN(expensePercent) || isNaN(inflationRate)
+      ) {
+        resultDiv.innerHTML = "<p class='error'>Please enter all fields correctly.</p>";
+        return;
+      }
+
+      const yearsToRetire = retirementAge - currentAge;
+      const yearsInRetirement = lifeExpectancy - retirementAge;
+
+      const adjustedMonthlyExpense = monthlyExpense * (expensePercent / 100);
+      const inflationAdjustedMonthly = adjustedMonthlyExpense * Math.pow(1 + inflationRate / 100, yearsToRetire);
+      const yearlyExpenseAtRetirement = inflationAdjustedMonthly * 12;
+
+      const realRate = ((1 + 0.12) / (1 + inflationRate / 100)) - 1;
+      const corpusRequired = yearlyExpenseAtRetirement * ((1 - Math.pow(1 + realRate, -yearsInRetirement)) / realRate);
+
+      const presentValueCorpus = corpusRequired / Math.pow(1 + 0.12, yearsToRetire);
+
+      const monthlyRate = 0.12 / 12;
+      const monthsToRetire = yearsToRetire * 12;
+      const monthlySIP = presentValueCorpus * monthlyRate / (Math.pow(1 + monthlyRate, monthsToRetire) - 1);
+
+      resultDiv.innerHTML = `
+        <h3>Results</h3>
+        <p>Years Remaining for Retirement: <strong>${yearsToRetire}</strong></p>
+        <p>Years in Retirement: <strong>${yearsInRetirement}</strong></p>
+        <p>Estimated Monthly Expense Post Retirement: ₹<strong>${Math.round(adjustedMonthlyExpense).toLocaleString()}</strong></p>
+        <p>Inflation-adjusted Monthly Expense at Retirement: ₹<strong>${Math.round(inflationAdjustedMonthly).toLocaleString()}</strong></p>
+        <p>Yearly Expense at Retirement: ₹<strong>${Math.round(yearlyExpenseAtRetirement).toLocaleString()}</strong></p>
+        <p>Corpus Required at Retirement: ₹<strong>${Math.round(corpusRequired).toLocaleString()}</strong></p>
+        <p>Present Value of Required Corpus (Today): ₹<strong>${Math.round(presentValueCorpus).toLocaleString()}</strong></p>
+        <p>Monthly SIP Required to Achieve Corpus (assuming 12% annual return): ₹<strong>${Math.round(monthlySIP).toLocaleString()}</strong></p>
+      `;
+    }
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Step-Up SIP Calculator</title>
+  <style>
+    
+
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 440px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #264391;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #264391;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result h3 {
+      color: #264391;
+      margin-bottom: 10px;
+    }
+
+    .result p {
+      margin: 6px 0;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div>
+    <nav class="navbar">
+      <div class="logo">FinanceX</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="learnzone.html">LearnZone</a></li>
+        <li><a href="news.html">LiveAnalytics</a></li>
+        <li><a href="filter.html">DecideX</a></li>
+        <li><a href="smartcalc.html">SmartCal-C</a></li>
+        <li><a href="chatbot.html">FinSight</a></li>
+        <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="profile-icon">
+        <div class="dropdown">
+          <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+          <div class="dropdown-content">
+            <a href="#">English</a>
+            <a href="#">Spanish</a>
+            <a href="#">French</a>
+            <a href="#">German</a>
+            <a href="#">Hindi</a>
+          </div>
+        </div>
+        <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile"></a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="parent-container">
+  <div class="container">
+    <h2>Step-Up SIP Calculator</h2>
+
+    <div class="input-group">
+      <label for="monthlySIP">Initial Monthly SIP Investment (₹):</label>
+      <input type="number" id="monthlySIP" placeholder="e.g. 5000">
+    </div>
+
+    <div class="input-group">
+      <label for="annualIncrease">Annual Increase in SIP (%):</label>
+      <input type="number" id="annualIncrease" placeholder="e.g. 10">
+    </div>
+
+    <div class="input-group">
+      <label for="expectedReturn">Expected Annual Return (%):</label>
+      <input type="number" id="expectedReturn" placeholder="e.g. 12">
+    </div>
+
+    <div class="input-group">
+      <label for="duration">Investment Duration (in Years):</label>
+      <input type="number" id="duration" placeholder="e.g. 10">
+    </div>
+
+    <button onclick="calculateStepUpSIP()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+  </div>
+
+  <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+  <script>
+    function calculateStepUpSIP() {
+      const monthlySIP = parseFloat(document.getElementById("monthlySIP").value);
+      const annualIncrease = parseFloat(document.getElementById("annualIncrease").value);
+      const expectedReturn = parseFloat(document.getElementById("expectedReturn").value);
+      const duration = parseInt(document.getElementById("duration").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(monthlySIP) || isNaN(annualIncrease) || isNaN(expectedReturn) || isNaN(duration)) {
+        resultDiv.innerHTML = "<p class='error'>Please enter valid numbers in all fields.</p>";
+        resultDiv.classList.add("show");
+        return;
+      }
+
+      const months = duration * 12;
+      const monthlyRate = expectedReturn / 12 / 100;
+      let totalInvestment = 0;
+      let futureValue = 0;
+      let currentSIP = monthlySIP;
+
+      for (let year = 1; year <= duration; year++) {
+        for (let month = 1; month <= 12; month++) {
+          const monthsRemaining = (duration - year) * 12 + (12 - month + 1);
+          futureValue += currentSIP * Math.pow(1 + monthlyRate, monthsRemaining);
+          totalInvestment += currentSIP;
+        }
+        currentSIP *= (1 + annualIncrease / 100);
+      }
+
+      const earnings = futureValue - totalInvestment;
+
+      resultDiv.innerHTML = `
+        <h3>Results</h3>
+        <p><strong>Total Amount Invested:</strong> ₹${Math.round(totalInvestment).toLocaleString()}</p>
+        <p><strong>Future Value of Investment:</strong> ₹${Math.round(futureValue).toLocaleString()}</p>
+        <p><strong>Total Earnings:</strong> ₹${Math.round(earnings).toLocaleString()}</p>
+      `;
+      resultDiv.classList.add("show");
+    }
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>

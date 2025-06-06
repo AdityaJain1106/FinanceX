@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Live Analytics | FinanceX</title>
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 1.8rem auto;
+            padding: 1rem;
+        }
+
+        .container section {
+            margin-bottom: 2rem;
+        }
+
+        .widget {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container section h2 {
+            color: #004080;
+            padding: 0px 0px 20px 0px;
+        }
+
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .news-main-section h2 {
+            color: #004080;
+        }
+
+        .news-main-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-main-section li {
+            background: white;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            transition: background 0.3s;
+        }
+
+        .news-main-section li:hover {
+            background: #e6f0ff;
+        }
+
+        .news-main-section a {
+            text-decoration: none;
+            color: #004080;
+            font-weight: bold;
+        }
+
+        .time {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+
+        .main-heading {
+            text-align: center;
+            padding: 30px 0px 0px 0px;
+            color: #264391;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+    <h1 class="main-heading">Finance News - Live Updates</h1>
+
+
+    <div class="container">
+        <section>
+            <h2>Market Indices</h2>
+            <div class="widget">
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript"
+                        src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+                            {
+                                "symbols": [
+                                    { "proName": "BSE:SENSEX", "title": "BSE Sensex" },
+                                    { "proName": "NSE:NIFTY", "title": "Nifty 50" },
+                                    { "proName": "NSE:BANKNIFTY", "title": "Bank Nifty" },
+                                    { "proName": "NSE:CNXIT", "title": "Nifty IT" },
+                                    { "proName": "NSE:CNXFMCG", "title": "Nifty FMCG" },
+                                    { "proName": "NSE:CNXPHARMA", "title": "Nifty Pharma" }
+                                ],
+                                    "showSymbolLogo": true,
+                                        "colorTheme": "light",
+                                            "isTransparent": false,
+                                                "displayMode": "adaptive",
+                                                    "locale": "en"
+                            }
+                        </script>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Latest Financial News</h2>
+            <div class="widget">
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript"
+                        src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js">
+                            {
+                                "feedMode": "market",
+                                    "market": "india",
+                                        "colorTheme": "light",
+                                            "isTransparent": false,
+                                                "displayMode": "regular",
+                                                    "width": "100%",
+                                                        "height": 500,
+                                                            "locale": "en"
+                            }
+                        </script>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section>
+            <h2>TradingView Chart</h2>
+            <div class="widget-container" id="tradingview_apple_chart"></div>
+            <script src="https://s3.tradingview.com/tv.js"></script>
+            <script>
+                new TradingView.widget({
+                    "width": "100%",
+                    "height": "500px",
+                    "symbol": "NASDAQ:AAPL",
+                    "interval": "D",
+                    "timezone": "Etc/UTC",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "allow_symbol_change": true,
+                    "container_id": "tradingview_apple_chart"
+                });
+            </script>
+        </section>
+    </div>
+
+
+    <div>
+        <main class="news-main-section">
+            <h2>Latest Headlines</h2>
+            <ul id="news-list">
+                <li>Loading news...</li>
+            </ul>
+        </main>
+
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script>
+        const API_KEY = "pub_870637c6aa27a14ba712ae615d4c054c3110a";
+        const API_URL = `https://newsdata.io/api/1/news?apikey=${API_KEY}&category=business&language=en`;
+
+        async function fetchNews() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                const newsList = document.getElementById("news-list");
+                newsList.innerHTML = "";
+
+                data.results.forEach(article => {
+                    const listItem = document.createElement("li");
+
+                    const title = document.createElement("a");
+                    title.href = article.link;
+                    title.textContent = article.title;
+                    title.target = "_blank";
+
+                    const pubDate = document.createElement("div");
+                    pubDate.className = "time";
+                    pubDate.textContent = `Published on: ${new Date(article.pubDate).toLocaleString()}`;
+
+                    listItem.appendChild(title);
+                    listItem.appendChild(pubDate);
+
+                    newsList.appendChild(listItem);
+                });
+            } catch (error) {
+                document.getElementById("news-list").innerHTML = "<li>Error fetching news.</li>";
+                console.error("Error fetching news:", error);
+            }
+        }
+
+        // Initial fetch
+        fetchNews();
+
+        // Auto-refresh every 5 minutes (300,000 ms)
+        setInterval(fetchNews, 300000);
+
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
+
+</body>
+
+</html>

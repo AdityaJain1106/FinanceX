@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>SmartCal-C | FinanceX</title>
+    <style>
+
+
+        .container {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 60px;
+            margin: 20px 100px 50px 100px;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                margin: 20px 0px;
+                gap: 20px;
+            }
+        }
+
+        .box {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 250px;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .box:hover img {
+            transform: rotate(-5deg);
+        }
+
+        .box img {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .box h2 {
+            font-size: 18px;
+            margin: 10px 0 5px;
+            color: #264391;
+        }
+
+        .box p {
+            font-size: 14px;
+            color: #666;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+
+    <div>
+        <h1 class="main-heading">Financial Calculator</h1>
+
+        <div class="container">
+            <a href="calculator/cagrcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/inflation_16961383.png"
+                        alt="Icon">
+                    <h2>CAGR Calculator</h2>
+                    <p>The simplest Compounded Annual Growth Rate</p>
+                </div>
+            </a>
+
+            <a href="calculator/sipcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/interest_18233805.png"
+                        alt="Icon">
+                    <h2>SIP Calculator</h2>
+                    <p>Calculate how much you need to save or how much you will accumulate with your SIP</p>
+                </div>
+            </a>
+
+            <a href="calculator/goalsipcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/margin_2640849.png"
+                        alt="Icon">
+                    <h2>GOAL SIP Calculator</h2>
+                    <p>Calculate how much you will need to save to achieve your goal</p>
+                </div>
+            </a>
+
+            <a href="calculator/retiermentcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/retirement_4072872.png"
+                        alt="Icon">
+                    <h2>Retirement Planning Calculator</h2>
+                    <p>Calculate how much corpus you require to retire</p>
+                </div>
+            </a>
+
+            <a href="calculator/lumpsumcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/growth_3051094.png"
+                        alt="Icon">
+                    <h2>LUMPSUM FV Calculator</h2>
+                    <p>Calculate the future value of present amount</p>
+                </div>
+            </a>
+
+            <a href="calculator/goallumpsum.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/winner_1622580.png"
+                        alt="Icon">
+                    <h2>GOAL Lumpsum Calculator</h2>
+                    <p>Calculate how much amount you require today for your future goal</p>
+                </div>
+            </a>
+
+            <a href="calculator/stepsipcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/steps_7802882.png"
+                        alt="Icon">
+                    <h2>Step Up SIP Calculator</h2>
+                    <p>Estimate growth when you increase your SIP amount annually</p>
+                </div>
+            </a>
+
+            <a href="calculator/postsizcalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/risk_5341108.png"
+                        alt="Icon">
+                    <h2>Position Sizing Calculator</h2>
+                    <p>Calculate how many shares to buy based on your risk and capital</p>
+                </div>
+            </a>
+
+            <a href="calculator/carloancalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/car-service_1514796.png"
+                        alt="Icon">
+                    <h2>Car Loan Calculator</h2>
+                    <p>Calculate your EMI, down payment, and affordability for buying your dream car</p>
+                </div>
+            </a>
+
+            <a href="calculator/emicalc.html">
+                <div class="box">
+                    <img src="https://d502jbuhuh9wk.cloudfront.net/orgData/5df0bac8e4b0947308291487/pages/assets/images/calendar_14499438.png"
+                        alt="Icon">
+                    <h2>EMI Calculator</h2>
+                    <p>Compute your monthly EMI, total interest, and total payment for any loan</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

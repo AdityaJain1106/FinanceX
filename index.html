@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <title>FinanceX</title>
+    <style>
+
+        main {
+            margin: 20px 60px;
+        }
+
+        .section-one {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            background-image: url(img/IMG_20250605_235245.jpg);
+            background-repeat: no-repeat, repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+            color: aliceblue;
+            justify-content: center;
+        }
+
+        .left {
+            width: 70%;
+            padding: 0px 0px 0px 40px;
+
+        }
+
+        .right {
+            width: 30%;
+        }
+
+        .left h1 {
+            font-size: 72px;
+        }
+
+        .left p {
+            font-size: 28px;
+        }
+
+        .left button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #264391;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .left button:hover {
+            background-color: #1f326e;
+        }
+
+        .right button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #264391;
+            color: white;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .right-btn {
+            position: absolute;
+            bottom: 0px;
+            right: 40px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .left-hidden-btn {
+            display: none;
+        }
+
+        .left-hidden-btn button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #264391;
+            color: white;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+
+
+        .section-two {
+            margin: 50px 30px 0px 30px;
+            text-align: center;
+        }
+
+        .section-two h1 {
+            color: #264391;
+            font-size: 72px;
+            letter-spacing: 2px;
+        }
+
+        .section-two h2 {
+            font-size: 32px;
+        }
+
+        .section-two-img img {
+            height: auto;
+            display: block;
+            margin: auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .buttons-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .buttons-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .buttons-wrapper::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+
+        .buttons-wrapper button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #264391;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 0 0px;
+        }
+
+        .buttons-wrapper button:hover {
+            background-color: #1f326e;
+        }
+
+        .section-two-btn button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #264391;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .section-two-btn button:hover {
+            background-color: #1f326e;
+            color: white;
+        }
+
+        .section-three {
+            margin: 50px 30px 0px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .slide-container {
+            max-width: 1120px;
+            width: 100%;
+            padding: 0px 0;
+        }
+
+        .slide-content {
+            margin: 0 40px;
+            overflow: hidden;
+            border-radius: 25px;
+        }
+
+        .card {
+            border-radius: 25px;
+            background-color: #FFF;
+        }
+
+        .image-content,
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 14px;
+        }
+
+        .image-content {
+            position: relative;
+            row-gap: 5px;
+            padding: 25px 0;
+        }
+
+        .overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #264391;
+            border-radius: 25px 25px 0 25px;
+        }
+
+        .overlay::before,
+        .overlay::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -40px;
+            height: 40px;
+            width: 40px;
+            background-color: #264391;
+        }
+
+        .overlay::after {
+            border-radius: 0 25px 0 0;
+            background-color: #FFF;
+        }
+
+        .card-image {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            background: #FFF;
+            padding: 3px;
+        }
+
+        .card-image .card-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #1f326e;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #707070;
+            text-align: center;
+        }
+
+        .button {
+            border: none;
+            font-size: 16px;
+            color: #FFF;
+            padding: 8px 16px;
+            background-color: #264391;
+            border-radius: 6px;
+            margin: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: #1f326e;
+        }
+
+        .swiper-navBtn {
+            color: #1f326e;
+            transition: color 0.3s ease;
+        }
+
+        .swiper-navBtn:hover {
+            color: #1f326e;
+        }
+
+        .swiper-navBtn::before,
+        .swiper-navBtn::after {
+            font-size: 35px;
+        }
+
+        .swiper-button-next {
+            right: 0;
+        }
+
+        .swiper-button-prev {
+            left: 0;
+        }
+
+        .swiper-pagination-bullet {
+            background-color: #1f326e;
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #1f326e;
+        }
+
+        .section-four {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 40px 20px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .form-section,
+        .image-section {
+            flex: 1 1 400px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .section-four button {
+            background-color: #111f42;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .section-four button:hover {
+            background-color: #264391;
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .section-four {
+                flex-direction: column;
+                padding: 20px 10px;
+            }
+
+            .form-section,
+            .image-section {
+                padding: 20px;
+            }
+        }
+
+
+        @media screen and (max-width: 768px) {
+            .slide-content {
+                margin: 0 10px;
+            }
+
+            .swiper-navBtn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 780px) and (min-width: 600px) {
+            .left h1 {
+                font-size: 64px;
+            }
+
+            .left p {
+                font-size: 20px;
+            }
+
+            .section-two h1 {
+                font-size: 64px;
+            }
+
+            .section-two h2 {
+                font-size: 28px;
+            }
+
+            .section-two-img img {
+                width: 85%;
+            }
+        }
+
+        @media screen and (max-width: 600px) and (min-width: 475px) {
+            .right {
+                display: none;
+            }
+
+            .section-one {
+                height: 380px;
+            }
+
+            .left h1 {
+                font-size: 48px;
+            }
+
+            .left p {
+                font-size: 18px;
+            }
+
+            .left-hidden-btn {
+                display: block;
+            }
+
+            .section-two h1 {
+                font-size: 52px;
+            }
+
+            .section-two h2 {
+                font-size: 24px;
+            }
+
+            .section-two-img img {
+                width: 85%;
+            }
+        }
+
+        @media screen and (max-width: 475px) and (min-width: 385px) {
+            .right {
+                display: none;
+            }
+
+            .section-one {
+                height: 330px;
+            }
+
+            .left h1 {
+                font-size: 32px;
+            }
+
+            .left p {
+                font-size: 14px;
+            }
+
+            .left-hidden-btn {
+                display: block;
+            }
+
+            .section-two h1 {
+                font-size: 42px;
+            }
+
+            .section-two h2 {
+                font-size: 16px;
+            }
+
+            .section-two-img img {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 385px) and (min-width: 319px) {
+            .right {
+                display: none;
+            }
+
+            .section-one {
+                height: 350px;
+            }
+
+            .left h1 {
+                font-size: 28px;
+            }
+
+            .left p {
+                font-size: 14px;
+            }
+
+            .left-hidden-btn {
+                display: block;
+            }
+
+            .section-two h1 {
+                font-size: 40px;
+            }
+
+            .section-two h2 {
+                font-size: 16px;
+            }
+
+            .section-two-img img {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <div class="section-one">
+        <div class="left">
+            <h1 style="margin: 0;">Learn Analyze/</h1>
+            <h1 style="margin: 0;">Decide Grow</h1>
+            <br>
+            <p style="margin: 0;">Empowering smart financial decisions</p>
+            <p style="margin: 0;">through insights, tools, and real-time analytics</p>
+            <br>
+            <br>
+            <br>
+            <button>
+                Join
+            </button>
+            <div class="left-hidden-btn">
+
+                <br>
+                <button>
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/play--v1.png" alt="Play Button"
+                        width="16px"><span style="padding-left: 5px;">Watch</span>
+                </button>
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="right-btn">
+                <button><img src="https://img.icons8.com/ios-filled/35/ffffff/play--v1.png" alt="Play Button"
+                        width="16px"><span style="padding-left: 5px;">Watch</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section-two">
+        <h1>Where smart money starts.</h1>
+        <br>
+        <h2>Join thousands taking control of their financial future with insights, tools, and real-time data.</h2>
+        <br>
+        <div class="buttons-wrapper">
+            <button onclick="changeImage(0)">Knowledge</button>
+            <button onclick="changeImage(1)">Analytics</button>
+            <button onclick="changeImage(2)">Compare</button>
+            <button onclick="changeImage(3)">Calculate</button>
+            <button onclick="changeImage(4)">Chatbot</button>
+        </div>
+
+        <div class="section-two-img">
+            <img id="displayImage" src="img/A young man is writing a letter. The background is.webp"
+                alt="Feature Image">
+        </div>
+
+        <div class="section-two-btn">
+            <button id="exploreBtn" onclick="window.location.href='#know'">Explore Features</button>
+        </div>
+    </div>
+
+    <div class="section-three">
+        <div class="slide-container swiper">
+            <div class="slide-content">
+                <div class="card-wrapper swiper-wrapper">
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile1.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Ritika Sharma</h2>
+                            <p class="description">Absolutely love FinanceX! The LearnZone helped me finally understand
+                                terms like mutual funds and SIPs. Perfect for beginners!</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile2.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Priya Nair</h2>
+                            <p class="description">SmartCal-C is a game changer! I used the loan calculator and it gave
+                                me a clear EMI breakup. Very intuitive.</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile3.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Ankit Mehra</h2>
+                            <p class="description">The bank comparison tool in DecideX is super helpful. Just wish there
+                                were more banks included.</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile4.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Mohammed Faisal</h2>
+                            <p class="description">LiveAnalytics keeps me updated on market trends. It’s fast and
+                                reliable. Maybe add crypto updates too?</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile5.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Rahul Yadav</h2>
+                            <p class="description">Overall it's good, but I found the user interface a bit cluttered.
+                                Needs cleaner design.</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile6.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Neha Kapoor</h2>
+                            <p class="description">I asked a complex tax question on FinSight and got a clear answer
+                                within minutes. Impressive support!</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile7.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Vikram Sinha</h2>
+                            <p class="description">The calculators are accurate and easy to use. Great resource for
+                                financial planning.</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile8.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">
+                                Ishita Rane</h2>
+                            <p class="description">I’m new to finance and this website made me feel confident about
+                                managing my money. Loved it!</p>
+                        </div>
+                    </div>
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="img/profile9.jpg" alt="" class="card-img">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">Devansh Gupta</h2>
+                            <p class="description">Very detailed and practical. Would be great if you added a budget
+                                tracker or expense manager next!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="swiper-button-next swiper-navBtn"></div>
+            <div class="swiper-button-prev swiper-navBtn"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+
+    <div class="section-four">
+        <div class="form-section">
+            <h2>Waiting for your Feedback</h2>
+            <p>If you have any queries, suggestions, or require support, feel free to reach out to us. We're here to
+                help you
+                get the most from FinanceX.</p>
+            <form action="POST" data-netlify="true">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        const images = [
+            "img/A young man is writing a letter. The background is.webp",
+            "img/Create an image showcasing a bustling digital mark.webp",
+            "img/A monthly savings chart with increasing bars.webp",
+            "img/Generate design concepts for a web app that combin.webp",
+            "img/question mark on black background.webp"
+        ];
+
+        const exploreTexts = [
+            "Discover Key Terms",
+            "View Live Analytics",
+            "Compare Financial Products",
+            "Use Smart Calculators",
+            "Ask Financial Questions"
+        ];
+
+        const exploreLinks = [
+            "https://financesx.netlify.app/learnzone",
+            "https://financesx.netlify.app/news",
+            "https://financesx.netlify.app/filter",
+            "https://financesx.netlify.app/smartcalc",
+            "https://financesx.netlify.app/chatbot"
+        ];
+
+        function changeImage(index) {
+            const imgElement = document.getElementById("displayImage");
+            const exploreBtn = document.getElementById("exploreBtn");
+
+            imgElement.src = images[index];
+            exploreBtn.textContent = exploreTexts[index];
+            exploreBtn.onclick = () => window.location.href = exploreLinks[index];
+        }
+
+        // function changeImage(index) {
+        //     const imgElement = document.getElementById("displayImage");
+        //     imgElement.src = images[index];
+        // }
+
+        var swiper = new Swiper(".slide-content", {
+            slidesPerView: 3,
+            spaceBetween: 25,
+            loop: true,
+            centerSlide: 'true',
+            fade: 'true',
+            grabCursor: 'true',
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 2,
+                },
+                950: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>FinSight | FinanceX</title>
+  <style>
+    .container {
+      max-width: 100%;
+      margin: 20px 150px 50px 150px;
+      border-radius: 10px;
+      height: auto;
+    }
+
+    .chat-box {
+      background-color: #264391;
+      background-image: url(img/94b4449793f55d40104df108e7793ed6cc0dd260.png);
+      background-repeat: no-repeat;
+      background-position: bottom right;
+      background-size: contain;
+      position: relative;
+      height: 400px;
+      overflow-y: auto;
+      border: 0px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      color: white;
+
+    }
+
+    .chat-message {
+      color: white;
+    }
+
+    .user {
+      color: white;
+      margin: 20px 25px 10px 0px;
+      text-align: right;
+    }
+
+    .bot {
+      margin: 20px 0px 10px 25px;
+      color: white;
+      text-align: left;
+    }
+
+    .input-box {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .input-area {
+      display: flex;
+      border-radius: 6px;
+      border: 2.3px solid #ccc;
+    }
+
+    #user-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+    }
+
+    #suggestions {
+      top: 42px;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-top: none;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 999;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #suggestions li {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+
+    #suggestions li:hover {
+      background-color: #f0f0f0;
+    }
+
+    button {
+      padding: 8px;
+      background-color: #111f42;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #111f42;
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 500px) {
+      .container {
+        max-width: 100%;
+        margin: 20px 70px 50px 70px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        height: auto;
+      }
+
+      .user {
+        color: white;
+        margin: 20px 15px 10px 0px;
+        text-align: right;
+      }
+
+      .bot {
+        margin: 20px 0px 10px 15px;
+        color: white;
+        text-align: left;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .container {
+        max-width: 100%;
+        margin: 20px 30px 50px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        height: auto;
+      }
+
+      .user {
+        color: white;
+        margin: 20px 5px 10px 0px;
+        text-align: right;
+      }
+
+      .bot {
+        margin: 20px 0px 10px 5px;
+        color: white;
+        text-align: left;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+
+  <div>
+    <nav class="navbar">
+      <div class="logo">FinanceX</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="learnzone.html">LearnZone</a></li>
+        <li><a href="news.html">LiveAnalytics</a></li>
+        <li><a href="filter.html">DecideX</a></li>
+        <li><a href="smartcalc.html">SmartCal-C</a></li>
+        <li><a href="chatbot.html">FinSight</a></li>
+        <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="profile-icon">
+        <div class="dropdown">
+          <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+          <div class="dropdown-content">
+            <a href="#">English</a>
+            <a href="#">Spanish</a>
+            <a href="#">French</a>
+            <a href="#">German</a>
+            <a href="#">Hindi</a>
+          </div>
+        </div>
+        <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile"></a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+
+
+  <h1 class="main-heading">Finance FAQ Bot</h1>
+  <div class="container">
+    <div class="chat-box" id="chat-box"></div>
+    <div class="input-box">
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="Ask a question..." oninput="showSuggestions()"
+          onkeydown="handleEnter(event)" />
+        <button onclick="handleUserQuestion()">
+          <img src="https://img.icons8.com/ios-filled/10/ffffff/chevron-right.png" alt="Right Arrow">
+        </button>
+      </div>
+      <ul id="suggestions"></ul>
+    </div>
+  </div>
+
+  <br>
+  <footer class="footer">
+    <div class="footer-left">
+      <a href="termsandcondition.html">Terms of Use</a>
+      <a href="pricavypolicy.html">Privacy Policy</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="FAQ.HTML">FAQ</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+    <div class="footer-right">
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+    </div>
+  </footer>
+
+
+  <script src="script4.js"></script>
+</body>
+
+</html>

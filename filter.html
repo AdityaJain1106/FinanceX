@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>DecideX | FinanceX</title>
+    <style>
+
+        main {
+            margin: 0px 40px 40px 40px;
+        }
+
+        select,
+        input {
+            margin: 10px 7px;
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid #264391;
+            border-radius: 8px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #264391;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+        .main-heading2 {
+            text-align: center;
+            color: #264391;
+        }
+
+        #searchBar {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border: 2px solid #264391;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .bank-container {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 60px;
+            margin: 20px 100px;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        @media screen and (max-width: 768px) and (min-width: 540px) {}
+
+        .bank-box {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            width: 225px;
+            height: 225px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #264391;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 18px;
+        }
+        .bank-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .bank-box.selected {
+            border-color: #1f326e;
+            box-shadow: 0 0 12px #1f326e;
+        }
+
+        .bank-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        #compareBtn {
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #264391;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #compareBtn:hover {
+            background-color: #1f326e;
+        }
+
+        #dialog {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            background: white;
+            padding: 20px;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px #333;
+            z-index: 10;
+        }
+
+        #dialog h3 {
+            margin-top: 0;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        .close-btn {
+            margin-top: 10px;
+            padding: 5px 15px;
+            border: none;
+            background-color: #264391;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .table-class {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 1075px) and (min-width: 768px) {
+            .bank-container {
+                display: flex;
+                justify-content: space-evenly;
+                margin: 20px 0px;
+                flex-wrap: wrap;
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 768px) and (min-width: 540px) {
+            .bank-container {
+                height: 1200px;
+                overflow-x: auto;
+            }
+
+            .table-class {
+                height: 1200px;
+                overflow-x: auto;
+            }
+
+            .bank-container {
+                display: flex;
+                justify-content: space-evenly;
+                margin: 20px 0px;
+                flex-wrap: wrap;
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 540px) {
+            .bank-container {
+                height: 800px;
+                overflow-x: auto;
+            }
+
+            .table-class {
+                height: 800px;
+                overflow-x: auto;
+            }
+            .bank-container {
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+                flex-direction: row;
+                margin: 20px 0px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+
+
+        <div class="filter-div1">
+            <h1 class="main-heading">Bank Comparison Portal</h1>
+            <div class="main-heading2">
+                <input type="text" id="searchBar" placeholder="Search for a bank...">
+                <button id="compareBtn">Compare</button>
+            </div>
+            <div class="bank-container" id="banks"></div>
+            <div id="overlay"></div>
+            <div id="dialog">
+                <h3>Bank Comparison</h3>
+                <div id="comparisonContent"></div>
+                <button class="close-btn" onclick="closeDialog()">Close</button>
+            </div>
+        </div>
+
+
+        <div class="filter-div2">
+            <div class="main-heading">
+                <h2>🔎 Filter Bank Details</h2>
+            </div>
+            <div class="main-heading2">
+
+                <label for="tag">Choose a Tag:</label>
+                <select id="tag">
+                    <option value="">-- All Tags --</option>
+                    <option value="SIP Available">SIP Available</option>
+                    <option value="EMI on Debit Card">EMI on Debit Card</option>
+                    <option value="FD ≥ 7%">FD ≥ 7%</option>
+                    <option value="Loan ≤ 10.5%">Loan ≤ 10.5%</option>
+                    <option value="Credit Card Fee ≤ ₹500">Credit Card Fee ≤ ₹500</option>
+                    <option value="Net Banking">Net Banking</option>
+                </select>
+
+                <input type="text" id="search" placeholder="Type Bank Name..." />
+            </div>
+
+
+            <div class="table-class">
+
+                <table id="bankTable">
+                    <thead>
+                        <tr>
+                            <th>Bank Name</th>
+                            <th>SIP Available</th>
+                            <th>EMI on Debit Card</th>
+                            <th>FD ≥ 7%</th>
+                            <th>Loan ≤ 10.5%</th>
+                            <th>Credit Card Fee ≤ ₹500</th>
+                            <th>Net Banking</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script>
+        const data = [
+            ["State Bank of India", "✓", "✓", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Bank of Baroda", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Bank of India", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Canara Bank", "✓", "✗", "✗", "✓", "✓ (₹0)", "✓"],
+            ["Punjab National Bank", "✓", "✗", "✗", "✓", "✓ (₹299)", "✓"],
+            ["HDFC Bank", "✓", "✓", "✓", "✓", "✗ (₹750)", "✓"],
+            ["ICICI Bank", "✓", "✓", "✗", "✓", "✓ (₹500)", "✓"],
+            ["Axis Bank", "✓", "✓", "✓", "✗", "✗ (₹750)", "✓"],
+            ["Kotak Mahindra Bank", "✓", "✓", "✓", "✓", "✓ (₹299)", "✓"],
+            ["IndusInd Bank", "✓", "✓", "✓", "✗", "✓ (₹500)", "✓"],
+            ["Yes Bank", "✓", "✓", "✓", "✗", "✗ (₹599)", "✓"],
+            ["Federal Bank", "✓", "✓", "✓", "✓", "✓ (₹500)", "✓"],
+            ["IDFC FIRST Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Bandhan Bank", "✓", "✗", "✓", "✗", "✓ (₹299)", "✓"],
+            ["RBL Bank", "✓", "✓", "✓", "✗", "✗ (₹999)", "✓"],
+            ["South Indian Bank", "✓", "✓", "✗", "✗", "✓ (₹399)", "✓"],
+            ["City Union Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Karur Vysya Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Dhanlaxmi Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["CSB Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Jammu & Kashmir Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Nainital Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Union Bank of India", "✓", "✗", "✗", "✓", "✓ (₹299)", "✓"],
+            ["Indian Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Indian Overseas Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["UCO Bank", "✗", "✗", "✗", "✗", "✓ (₹199)", "✓"],
+            ["Bank of Maharashtra", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Central Bank of India", "✗", "✗", "✗", "✗", "✓ (₹0)", "✓"],
+            ["Punjab & Sind Bank", "✓", "✗", "✗", "✗", "✓ (₹499)", "✓"],
+            ["Citibank", "✓", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Standard Chartered Bank", "✓", "✗", "✗", "✗", "✗ (₹750)", "✓"],
+            ["HSBC", "✓", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Deutsche Bank", "✓", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Barclays Bank", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["BNP Paribas", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Bank of America", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["DBS Bank India", "✓", "✗", "✗", "✗", "✗ (₹750)", "✓"],
+            ["United Overseas Bank", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Shinhan Bank", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Mizuho Bank", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Credit Suisse AG", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Sberbank", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["UBS AG", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["FirstRand Bank", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["Commonwealth Bank of Australia", "✗", "✗", "✗", "✗", "✗ (₹1,000)", "✓"],
+            ["AU Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Equitas Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Ujjivan Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Jana Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Suryoday Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Utkarsh Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["ESAF Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Fincare Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["North East Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Shivalik Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"],
+            ["Unity Small Finance Bank", "✓", "✓", "✓", "✓", "✓ (₹0)", "✓"]
+
+        ];
+
+        const tagIndexMap = {
+            "SIP Available": 1,
+            "EMI on Debit Card": 2,
+            "FD ≥ 7%": 3,
+            "Loan ≤ 10.5%": 4,
+            "Credit Card Fee ≤ ₹500": 5,
+            "Net Banking": 6
+        };
+
+        const tableBody = document.getElementById("tableBody");
+        const tagSelect = document.getElementById("tag");
+        const searchInput = document.getElementById("search");
+
+        function renderTable() {
+            const selectedTag = tagSelect.value;
+            const searchText = searchInput.value.toLowerCase();
+
+            tableBody.innerHTML = ""; // Clear previous rows
+
+            data.forEach(row => {
+                const matchesTag = !selectedTag || (selectedTag && (
+                    selectedTag === "Credit Card Fee ≤ ₹500"
+                        ? row[5].includes("₹") && parseInt(row[5].replace(/[^\d]/g, '')) <= 500
+                        : row[tagIndexMap[selectedTag]] === "✓"
+                ));
+
+                const matchesSearch = row[0].toLowerCase().includes(searchText);
+
+                if (matchesTag && matchesSearch) {
+                    const tr = document.createElement("tr");
+                    row.forEach(cell => {
+                        const td = document.createElement("td");
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                }
+            });
+        }
+
+        tagSelect.addEventListener("change", renderTable);
+        searchInput.addEventListener("input", renderTable);
+
+        renderTable(); // Initial render
+    </script>
+    <script src="script.js"></script>
+    <script src="script3.js"></script>
+
+</body>
+
+</html>

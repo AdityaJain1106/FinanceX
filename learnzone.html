@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>LearnZone | FinanceX</title>
+    <style>
+        main {
+            margin: 0px 40px 40px 40px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .main-heading {
+            padding: 40px 0px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .container {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .word-list {
+            width: 30%;
+            max-height: 400px;
+            overflow-y: auto;
+            border-right: 1px solid #ccc;
+        }
+
+        .word-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .word-list li {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .word-list li:hover,
+        .word-list li.active {
+            background-color: #e0f7fa;
+        }
+
+        .description {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .description h3 {
+            color: #264391;
+        }
+
+        .active {
+            color: #264391;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .word-list {
+                width: 100%;
+                max-height: 200px;
+            }
+
+            .description {
+                padding: 10px;
+            }
+        }
+
+        footer {
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <div class="main-heading">
+            <h1>Your Gateway to Financial Wisdom</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for a word...">
+        </div>
+
+        <div class="container">
+            <div class="word-list">
+                <ul id="wordList">
+                    <li data-word="Asset">Asset</li>
+                    <li data-word="Liability">Liability</li>
+                    <li data-word="Net Worth">Net Worth</li>
+                    <li data-word="Income">Income</li>
+                    <li data-word="Expense">Expense</li>
+                    <li data-word="Budget">Budget</li>
+                    <li data-word="Savings">Savings</li>
+                    <li data-word="Interest">Interest</li>
+                    <li data-word="Compound Interest">Compound Interest</li>
+                    <li data-word="Inflation">Inflation</li>
+                    <li data-word="SIP (Systematic Investment Plan)">SIP (Systematic Investment Plan)</li>
+                    <li data-word="NAV (Net Asset Value)">NAV (Net Asset Value)</li>
+                    <li data-word="Units">Units</li>
+                    <li data-word="Mutual Fund">Mutual Fund</li>
+                    <li data-word="AMC (Asset Management Company)">AMC (Asset Management Company)</li>
+                    <li data-word="Fund Manager">Fund Manager</li>
+                    <li data-word="Scheme">Scheme</li>
+                    <li data-word="ROI (Return on Investment)">ROI (Return on Investment)</li>
+                    <li data-word="CAGR (Compounded Annual Growth Rate)">CAGR (Compounded Annual Growth Rate)</li>
+                    <li data-word="XIRR (Extended Internal Rate of Return)">XIRR (Extended Internal Rate of Return)</li>
+                    <li data-word="AUM (Assets Under Management)">AUM (Assets Under Management)</li>
+                    <li data-word="Expense Ratio">Expense Ratio</li>
+                    <li data-word="Exit Load">Exit Load</li>
+                    <li data-word="Lock-in Period">Lock-in Period</li>
+                    <li data-word="Regular SIP">Regular SIP</li>
+                    <li data-word="Top-Up SIP / Step-Up SIP">Top-Up SIP / Step-Up SIP</li>
+                    <li data-word="Flexible SIP">Flexible SIP</li>
+                    <li data-word="Perpetual SIP">Perpetual SIP</li>
+                    <li data-word="Trigger SIP">Trigger SIP</li>
+                    <li data-word="Frequency">Frequency</li>
+                    <li data-word="Tenure">Tenure</li>
+                    <li data-word="Goal-Based SIP">Goal-Based SIP</li>
+                    <li data-word="STP (Systematic Transfer Plan)">STP (Systematic Transfer Plan)</li>
+                    <li data-word="SWP (Systematic Withdrawal Plan)">SWP (Systematic Withdrawal Plan)</li>
+                    <li data-word="ELSS (Equity-Linked Saving Scheme)">ELSS (Equity-Linked Saving Scheme)</li>
+                    <li data-word="Capital Gains">Capital Gains</li>
+                    <li data-word="LTCG (Long-Term Capital Gains)">LTCG (Long-Term Capital Gains)</li>
+                    <li data-word="STCG (Short-Term Capital Gains)">STCG (Short-Term Capital Gains)</li>
+                    <li data-word="Account Number">Account Number</li>
+                    <li data-word="IFSC Code">IFSC Code</li>
+                    <li data-word="MICR Code">MICR Code</li>
+                    <li data-word="Branch">Branch</li>
+                    <li data-word="Balance">Balance</li>
+                    <li data-word="Savings Account">Savings Account</li>
+                    <li data-word="Current Account">Current Account</li>
+                    <li data-word="Fixed Deposit (FD)">Fixed Deposit (FD)</li>
+                    <li data-word="Recurring Deposit (RD)">Recurring Deposit (RD)</li>
+                    <li data-word="NRI Account (NRE/NRO)">NRI Account (NRE/NRO)</li>
+                    <li data-word="NEFT">NEFT</li>
+                    <li data-word="RTGS">RTGS</li>
+                    <li data-word="IMPS">IMPS</li>
+                    <li data-word="UPI">UPI</li>
+                    <li data-word="Cheque">Cheque</li>
+                    <li data-word="Demand Draft (DD)">Demand Draft (DD)</li>
+                    <li data-word="Debit Card">Debit Card</li>
+                    <li data-word="Credit Card">Credit Card</li>
+                    <li data-word="CVV">CVV</li>
+                    <li data-word="Net Banking">Net Banking</li>
+                    <li data-word="Mobile Banking">Mobile Banking</li>
+                    <li data-word="OTP">OTP</li>
+                    <li data-word="Loan">Loan</li>
+                    <li data-word="EMI (Equated Monthly Installment)">EMI (Equated Monthly Installment)</li>
+                    <li data-word="Interest Rate">Interest Rate</li>
+                    <li data-word="Collateral">Collateral</li>
+                    <li data-word="Credit Score">Credit Score</li>
+                    <li data-word="Overdraft">Overdraft</li>
+                    <li data-word="Statement">Statement</li>
+                    <li data-word="Minimum Balance">Minimum Balance</li>
+                    <li data-word="Penalty Charges">Penalty Charges</li>
+                    <li data-word="Service Charge">Service Charge</li>
+                    <li data-word="KYC (Know Your Customer)">KYC (Know Your Customer)</li>
+                    <li data-word="PAN (Permanent Account Number)">PAN (Permanent Account Number)</li>
+                    <li data-word="Aadhaar">Aadhaar</li>
+                    <li data-word="CIF Number">CIF Number</li>
+                    <li data-word="PIN">PIN</li>
+                    <li data-word="Phishing">Phishing</li>
+                    <li data-word="Two-Factor Authentication">Two-Factor Authentication</li>
+                    <li data-word="SSL Encryption">SSL Encryption</li>
+                    <li data-word="Customer Due Diligence (CDD)">Customer Due Diligence (CDD)</li>
+                    <li data-word="Enhanced Due Diligence (EDD)">Enhanced Due Diligence (EDD)</li>
+                    <li data-word="Simplified Due Diligence (SDD)">Simplified Due Diligence (SDD)</li>
+                    <li data-word="Politically Exposed Person (PEP)">Politically Exposed Person (PEP)</li>
+                    <li data-word="Beneficial Owner">Beneficial Owner</li>
+                    <li data-word="KYC Documents">KYC Documents</li>
+                    <li data-word="e-KYC (Electronic KYC)">e-KYC (Electronic KYC)</li>
+                    <li data-word="Periodic KYC Update / Re-KYC">Periodic KYC Update / Re-KYC</li>
+                    <li data-word="KYC Norms/Guidelines">KYC Norms/Guidelines</li>
+                    <li data-word="Risk-Based KYC">Risk-Based KYC</li>
+                    <li data-word="KYC Registry (CKYCR)">KYC Registry (CKYCR)</li>
+                    <li data-word="Principal Amount">Principal Amount</li>
+                    <li data-word="Reducing Balance Method">Reducing Balance Method</li>
+                    <li data-word="Flat Interest Rate">Flat Interest Rate</li>
+                    <li data-word="Loan Tenure">Loan Tenure</li>
+                    <li data-word="Amortization Schedule">Amortization Schedule</li>
+                    <li data-word="Prepayment">Prepayment</li>
+                    <li data-word="Foreclosure">Foreclosure</li>
+                    <li data-word="EMI Bounce">EMI Bounce</li>
+                    <li data-word="NACH Mandate">NACH Mandate</li>
+                    <li data-word="EMI in Arrears">EMI in Arrears</li>
+                    <li data-word="EMI in Advance">EMI in Advance</li>
+                    <li data-word="Floating Interest Rate">Floating Interest Rate</li>
+                    <li data-word="Fixed Interest Rate">Fixed Interest Rate</li>
+                    <li data-word="EMI Calculator">EMI Calculator</li>
+                    <li data-word="PAN Card">PAN Card</li>
+                    <li data-word="Form 49A">Form 49A</li>
+                    <li data-word="Form 49AA">Form 49AA</li>
+                    <li data-word="Mandatory PAN Usage in Banking">Mandatory PAN Usage in Banking</li>
+                    <li data-word="PAN-Aadhaar Linking">PAN-Aadhaar Linking</li>
+                    <li data-word="PAN Validation">PAN Validation</li>
+                    <li data-word="PAN for Minor">PAN for Minor</li>
+                    <li data-word="PAN for Non-Individual Entities">PAN for Non-Individual Entities</li>
+                    <li data-word="PAN Exemptions">PAN Exemptions</li>
+                    <li data-word="PAN Quoting for TDS">PAN Quoting for TDS</li>
+                    <li data-word="PAN in KYC">PAN in KYC</li>
+                    <li data-word="PAN and Form 60">PAN and Form 60</li>
+                    <li data-word="PAN Status Tracking">PAN Status Tracking</li>
+                    <li data-word="Duplicate PAN Card">Duplicate PAN Card</li>
+                    <li data-word="Bank Locker / Safe Deposit Locker">Bank Locker / Safe Deposit Locker</li>
+                    <li data-word="Locker Agreement">Locker Agreement</li>
+                    <li data-word="Locker Rent">Locker Rent</li>
+                    <li data-word="Nomination Facility">Nomination Facility</li>
+                    <li data-word="Locker Key">Locker Key</li>
+                    <li data-word="Joint Locker">Joint Locker</li>
+                    <li data-word="Custodian Key">Custodian Key</li>
+                    <li data-word="Safe Custody">Safe Custody</li>
+                    <li data-word="Locker Access Register">Locker Access Register</li>
+                    <li data-word="Surrender of Locker">Surrender of Locker</li>
+                    <li data-word="Locker Breaking">Locker Breaking</li>
+                    <li data-word="Security Deposit / FDR (Fixed Deposit Receipt)">Security Deposit / FDR (Fixed
+                        Deposit Receipt)</li>
+                    <li data-word="Liability of Bank">Liability of Bank</li>
+                    <li data-word="RBI Locker Guidelines (2021)">RBI Locker Guidelines (2021)</li>
+                    <li data-word="Indemnity Bond">Indemnity Bond</li>
+                    <li data-word="Credit Report">Credit Report</li>
+                    <li data-word="Debit Card">Debit Card</li>
+                    <li data-word="Credit Card">Credit Card</li>
+                    <li data-word="Mortgage">Mortgage</li>
+                    <li data-word="APR (Annual Percentage Rate)">APR (Annual Percentage Rate)</li>
+                    <li data-word="Stock">Stock</li>
+                    <li data-word="Bond">Bond</li>
+                    <li data-word="Dividend">Dividend</li>
+                    <li data-word="Portfolio">Portfolio</li>
+                    <li data-word="Mutual Fund">Mutual Fund</li>
+                    <li data-word="ETF (Exchange-Traded Fund)">ETF (Exchange-Traded Fund)</li>
+                    <li data-word="Capital Gain">Capital Gain</li>
+                    <li data-word="Risk Tolerance">Risk Tolerance</li>
+                    <li data-word="Bull Market">Bull Market</li>
+                    <li data-word="Bear Market">Bear Market</li>
+                    <li data-word="Taxable Income">Taxable Income</li>
+                    <li data-word="Tax Deduction">Tax Deduction</li>
+                    <li data-word="Tax Credit">Tax Credit</li>
+                    <li data-word="Income Tax">Income Tax</li>
+                    <li data-word="Capital Gains Tax">Capital Gains Tax</li>
+                    <li data-word="Pension">Pension</li>
+                    <li data-word="401(k)/Public Provident Fund (PPF)">401(k)/Public Provident Fund (PPF)</li>
+                    <li data-word="IRA (Individual Retirement Account)">IRA (Individual Retirement Account)</li>
+                    <li data-word="Premium">Premium</li>
+                    <li data-word="Deductible">Deductible</li>
+                    <li data-word="Coverage">Coverage</li>
+                    <li data-word="Life Insurance">Life Insurance</li>
+                    <li data-word="Health Insurance">Health Insurance</li>
+                    <li data-word="Revenue">Revenue</li>
+                    <li data-word="Profit">Profit</li>
+                    <li data-word="Loss">Loss</li>
+                    <li data-word="Cash Flow">Cash Flow</li>
+                    <li data-word="Balance Sheet">Balance Sheet</li>
+                    <li data-word="Income Statement">Income Statement</li>
+                    <li data-word="GDP (Gross Domestic Product)">GDP (Gross Domestic Product)</li>
+                    <li data-word="Recession">Recession</li>
+                    <li data-word="Diversification">Diversification</li>
+                    <li data-word="Annuity">Annuity</li>
+                    <li data-word="Yield">Yield</li>
+                    <li data-word="Equity">Equity</li>
+                    <li data-word="Liquidity">Liquidity</li>
+                    <li data-word="Roth IRA">Roth IRA</li>
+                    <li data-word="Traditional IRA">Traditional IRA</li>
+                    <li data-word="Hedge">Hedge</li>
+                    <li data-word="Speculation">Speculation</li>
+                    <li data-word="Real Estate Investment Trust (REIT)">Real Estate Investment Trust (REIT)</li>
+                    <li data-word="Derivatives">Derivatives</li>
+                    <li data-word="IPO (Initial Public Offering)">IPO (Initial Public Offering)</li>
+                    <li data-word="Market Capitalization">Market Capitalization</li>
+                    <li data-word="Blue Chip Stock">Blue Chip Stock</li>
+                    <li data-word="Penny Stock">Penny Stock</li>
+                    <li data-word="Index">Index</li>
+                    <li data-word="Volume">Volume</li>
+                    <li data-word="Volatility">Volatility</li>
+                    <li data-word="Bid Price">Bid Price</li>
+                    <li data-word="Ask Price">Ask Price</li>
+                    <li data-word="Market Order">Market Order</li>
+                    <li data-word="Accounts Payable">Accounts Payable</li>
+                    <li data-word="Accounts Receivable">Accounts Receivable</li>
+                    <li data-word="Depreciation">Depreciation</li>
+                    <li data-word="Amortization">Amortization</li>
+                    <li data-word="Accrual">Accrual</li>
+                    <li data-word="Gross Income">Gross Income</li>
+                    <li data-word="Operating Income">Operating Income</li>
+                    <li data-word="EBITDA">EBITDA</li>
+                    <li data-word="Break-even Point">Break-even Point</li>
+                    <li data-word="Return on Investment (ROI)">Return on Investment (ROI)</li>
+                    <li data-word="GST (Goods and Services Tax)">GST (Goods and Services Tax)</li>
+                    <li data-word="Excise Tax">Excise Tax</li>
+                    <li data-word="Withholding Tax">Withholding Tax</li>
+                    <li data-word="Form 16">Form 16</li>
+                    <li data-word="Subsidy">Subsidy</li>
+                    <li data-word="Tax Bracket">Tax Bracket</li>
+                    <li data-word="Audit">Audit</li>
+                    <li data-word="PAN (Permanent Account Number)">PAN (Permanent Account Number)</li>
+                    <li data-word="Filing Status">Filing Status</li>
+                    <li data-word="Income Tax Return (ITR)">Income Tax Return (ITR)</li>
+                    <li data-word="Emergency Fund">Emergency Fund</li>
+                    <li data-word="Financial Literacy">Financial Literacy</li>
+                    <li data-word="Impulse Buying">Impulse Buying</li>
+                    <li data-word="Frugality">Frugality</li>
+                    <li data-word="Opportunity Cost">Opportunity Cost</li>
+                    <li data-word="Pay Yourself First">Pay Yourself First</li>
+                    <li data-word="Lifestyle Inflation">Lifestyle Inflation</li>
+                    <li data-word="Zero-Based Budget">Zero-Based Budget</li>
+                    <li data-word="Financial Freedom">Financial Freedom</li>
+                    <li data-word="Debt Snowball Method">Debt Snowball Method</li>
+                    <li data-word="Accrued Interest">Accrued Interest</li>
+                    <li data-word="Adjustable-Rate Mortgage (ARM)">Adjustable-Rate Mortgage (ARM)</li>
+                    <li data-word="Annual Percentage Rate (APR)">Annual Percentage Rate (APR)</li>
+                    <li data-word="Annuity">Annuity</li>
+                    <li data-word="Appreciation">Appreciation</li>
+                    <li data-word="Asset Class">Asset Class</li>
+                    <li data-word="Automatic Transfer">Automatic Transfer</li>
+                    <li data-word="Back-End Load">Back-End Load</li>
+                    <li data-word="Balance Sheet">Balance Sheet</li>
+                    <li data-word="Balloon Payment">Balloon Payment</li>
+                    <li data-word="Bankruptcy">Bankruptcy</li>
+                    <li data-word="Basis Point">Basis Point</li>
+                    <li data-word="Bearer Bond">Bearer Bond</li>
+                    <li data-word="Beneficiary">Beneficiary</li>
+                    <li data-word="Blue Chip Stock">Blue Chip Stock</li>
+                    <li data-word="Book Value">Book Value</li>
+                    <li data-word="Bottom Line">Bottom Line</li>
+                    <li data-word="Break-Even Point">Break-Even Point</li>
+                    <li data-word="Broker">Broker</li>
+                    <li data-word="Buy and Hold">Buy and Hold</li>
+                    <li data-word="Callable Bond">Callable Bond</li>
+                    <li data-word="Capital">Capital</li>
+                    <li data-word="Capital Expenditure">Capital Expenditure</li>
+                    <li data-word="Capital Structure">Capital Structure</li>
+                    <li data-word="Cash Flow">Cash Flow</li>
+                    <li data-word="Certified Financial Planner (CFP)">Certified Financial Planner (CFP)</li>
+                    <li data-word="Claim Settlement Ratio">Claim Settlement Ratio</li>
+                    <li data-word="Collateral">Collateral</li>
+                    <li data-word="Commodities">Commodities</li>
+                    <li data-word="Consumer Price Index (CPI)">Consumer Price Index (CPI)</li>
+                    <li data-word="Contingency Fund">Contingency Fund</li>
+                    <li data-word="Corporate Bond">Corporate Bond</li>
+                    <li data-word="Cost of Living">Cost of Living</li>
+                    <li data-word="Credit Bureau">Credit Bureau</li>
+                    <li data-word="Credit Limit">Credit Limit</li>
+                    <li data-word="Credit Utilization Ratio">Credit Utilization Ratio</li>
+                    <li data-word="Custodian Bank">Custodian Bank</li>
+                    <li data-word="Day Trading">Day Trading</li>
+                    <li data-word="Debt-to-Income Ratio (DTI)">Debt-to-Income Ratio (DTI)</li>
+                    <li data-word="Depreciation">Depreciation</li>
+                    <li data-word="Digital Wallet">Digital Wallet</li>
+                    <li data-word="Direct Deposit">Direct Deposit</li>
+                    <li data-word="Discount Rate">Discount Rate</li>
+                    <li data-word="Dividend Yield">Dividend Yield</li>
+                    <li data-word="Dow Jones Industrial Average">Dow Jones Industrial Average</li>
+                    <li data-word="Early Withdrawal Penalty">Early Withdrawal Penalty</li>
+                    <li data-word="Earnings Per Share (EPS)">Earnings Per Share (EPS)</li>
+                    <li data-word="Economic Indicator">Economic Indicator</li>
+                    <li data-word="Escrow Account">Escrow Account</li>
+                    <li data-word="Ex-Dividend Date">Ex-Dividend Date</li>
+                    <li data-word="Exchange Rate">Exchange Rate</li>
+                    <li data-word="Expense Ratio">Expense Ratio</li>
+                    <li data-word="FICO Score">FICO Score</li>
+                    <li data-word="Financial Year">Financial Year</li>
+                    <li data-word="Fixed Asset">Fixed Asset</li>
+                    <li data-word="Forex (Foreign Exchange)">Forex (Foreign Exchange)</li>
+                    <li data-word="Futures Contract">Futures Contract</li>
+                    <li data-word="GAAP (Generally Accepted Accounting Principles)">GAAP (Generally Accepted Accounting
+                        Principles)</li>
+                    <li data-word="Grace Period">Grace Period</li>
+                    <li data-word="Gross Income">Gross Income</li>
+                    <li data-word="Growth Stock">Growth Stock</li>
+                    <li data-word="Guarantor">Guarantor</li>
+                    <li data-word="Holding Period">Holding Period</li>
+                    <li data-word="Idle Money">Idle Money</li>
+                    <li data-word="Index Fund">Index Fund</li>
+                    <li data-word="Inflation Index Bond">Inflation Index Bond</li>
+                    <li data-word="Installment">Installment</li>
+                    <li data-word="Interest Coverage Ratio">Interest Coverage Ratio</li>
+                    <li data-word="Internal Rate of Return (IRR)">Internal Rate of Return (IRR)</li>
+                    <li data-word="Insolvency">Insolvency</li>
+                    <li data-word="Inventory">Inventory</li>
+                    <li data-word="Joint Account">Joint Account</li>
+                    <li data-word="Leasing">Leasing</li>
+                    <li data-word="Letter of Credit">Letter of Credit</li>
+                    <li data-word="Liquidity Ratio">Liquidity Ratio</li>
+                    <li data-word="Loan-to-Value Ratio (LTV)">Loan-to-Value Ratio (LTV)</li>
+                    <li data-word="Lock-in Period">Lock-in Period</li>
+                    <li data-word="Market Capitalization">Market Capitalization</li>
+                    <li data-word="Money Market">Money Market</li>
+                    <li data-word="Monopoly">Monopoly</li>
+                    <li data-word="Mortgage">Mortgage</li>
+                    <li data-word="NAV (Net Asset Value)">NAV (Net Asset Value)</li>
+                    <li data-word="Negative Balance">Negative Balance</li>
+                    <li data-word="Nominal Interest Rate">Nominal Interest Rate</li>
+                    <li data-word="Non-Performing Asset (NPA)">Non-Performing Asset (NPA)</li>
+                    <li data-word="Options Contract">Options Contract</li>
+                    <li data-word="Over-the-Counter (OTC)">Over-the-Counter (OTC)</li>
+                    <li data-word="Par Value">Par Value</li>
+                    <li data-word="Pension Fund">Pension Fund</li>
+                    <li data-word="Portfolio Rebalancing">Portfolio Rebalancing</li>
+                    <li data-word="Pre-Tax Income">Pre-Tax Income</li>
+                    <li data-word="Principal">Principal</li>
+                    <li data-word="Quick Ratio">Quick Ratio</li>
+                    <li data-word="Redemption">Redemption</li>
+                    <li data-word="Return on Equity (ROE)">Return on Equity (ROE)</li>
+                    <li data-word="Reverse Mortgage">Reverse Mortgage</li>
+                    <li data-word="Secured Loan">Secured Loan</li>
+                    <li data-word="Systematic Risk">Systematic Risk</li>
+                    <li data-word="Yield">Yield</li>
+                </ul>
+            </div>
+            <div class="description" id="descriptionBox">
+                <p>Select a word or start typing to see its description.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+
+</body>
+
+</html>

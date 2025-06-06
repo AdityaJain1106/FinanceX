@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>About Us | FinanceX</title>
+    <style>
+        header {
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .main h3 {
+            color: #0a3d62;
+            margin-bottom: 20px;
+        }
+
+        .main h2 {
+            color: #0a3d62;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .feature img {
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .feature:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        @media screen and (max-width: 768px) {
+            .feature {
+                flex-direction: column !important;
+            }
+
+            .feature img {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                top: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <header class="main-heading">
+        <h1>About Us – FinanceX</h1>
+        <p>Empowering Financial Literacy, Analysis, and Decision-Making</p>
+    </header>
+
+    <section class="main">
+        <h2>What We Offer</h2>
+
+        <div class="feature">
+            <img src="img/icon for online classes.webp" alt="LearnZone" />
+            <div>
+                <h3>📚 LearnZone</h3>
+                <p>LearnZone is your financial classroom featuring terminology breakdowns, basic concepts, and complete
+                    knowledge of the financial world. Our intuitive structure breaks down complex financial jargon into
+                    digestible explanations, helping learners of all levels enhance their financial literacy. From
+                    students to working professionals, everyone can benefit from our categorized learning paths,
+                    glossary-based structure, and interactive content.</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <img src="img/very simple drawing of a cheerful team creating a .webp" alt="LiveAnalytics" />
+            <div>
+                <h3>📈 LiveAnalytics</h3>
+                <p>Real-time analytics and insights for tracking trends, market shifts, and making data-driven decisions
+                    in finance. Whether you're monitoring stock performance, interest rates, or currency fluctuations,
+                    LiveAnalytics provides visual dashboards and charts that help you quickly interpret data. With
+                    powerful filters and live integration with trusted financial data sources, it's built for
+                    professionals and everyday users alike.</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <img src="img/_To Know IA_ logo brain light bulb 2D modern font..webp" alt="DecideX" />
+            <div>
+                <h3>🧠 DecideX</h3>
+                <p>Compare interest rates, fees, credit card offers, and more across banks, all visualized in smart,
+                    interactive cards. DecideX takes the confusion out of financial decision-making by providing
+                    side-by-side comparisons and detailed summaries of financial products. It saves you time and ensures
+                    you’re choosing the best option based on accurate, up-to-date information tailored to your needs.
+                </p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <img src="img/Create an image where a calculator's buttons are t.webp" alt="SmartCal-C" />
+            <div>
+                <h3>🧮 SmartCal-C</h3>
+                <p>Financial calculators for EMI, Retirement, FD, PPF, and more. Plan and simulate your future finances
+                    with precision. Each calculator is crafted to handle multiple variables and provides instant results
+                    along with visual aids like graphs and summaries. Whether you’re planning your dream home,
+                    retirement, or savings strategy, SmartCal-C simplifies your financial planning.</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <img src="img/question background illustration.webp" alt="FinSight" />
+            <div>
+                <h3>🧵 FinSight</h3>
+                <p>AI-powered insights and tips tailored to your activity, habits, and financial goals, making each
+                    decision smarter. FinSight continuously learns from your interactions, providing personalized
+                    suggestions and alerts. It transforms how you engage with your finances, ensuring you're never out
+                    of the loop when it comes to optimizing your financial journey.</p>
+            </div>
+        </div>
+
+        <h2>Feature Highlights</h2>
+        <ul>
+            <li>🗂️ Terminology Glossary with detailed explanations</li>
+            <li>🔍 Compare Search for loans, cards, fees, etc.</li>
+            <li>🔎 Unified Search Bar across tools and content</li>
+            <li>📰 Real-time News via GNews, NewsAPI, and Bing News</li>
+            <li>💬 Q&A Forum and Chatbot for instant help</li>
+        </ul>
+        <br>
+        <br>
+
+        <h2>Our Vision</h2>
+        <p>FinanceX is dedicated to empowering individuals with financial knowledge, tools, and confidence. Financial
+            understanding should be simple and accessible for everyone.</p>
+
+        <br>
+        <br>
+
+        <h2>Join the FinanceX Community</h2>
+        <p>From learning to decision-making, FinanceX is your companion in taking control of your financial future.
+            Explore with us today.</p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
+
+</body>
+
+</html>

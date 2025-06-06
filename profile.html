@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Profile Setup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin: 0 4px;
+            transition: background 0.3s;
+        }
+
+        .step.active {
+            background-color: #264391;
+            color: white;
+            font-weight: bold;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .avatars {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .avatar-card {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, border 0.3s;
+        }
+
+        .avatar-card img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .avatar-card.selected {
+            border-color: #264391;
+            transform: scale(1.05);
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background: #264391;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-card {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            color: #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card img {
+            width: 100px;
+            border-radius: 50%;
+            margin: auto;
+            display: block;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .info-line i {
+            color: #264391;
+            min-width: 20px;
+        }
+
+        .tagline {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #264391;
+        }
+
+        .completion-meter {
+            background: #ccc;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .completion-meter-inner {
+            height: 100%;
+            background: #264391;
+            width: 80%;
+        }
+
+        footer{
+            position: fixed;
+            bottom: 0%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <h1 class="main-heading">Tailored Financial Experience Just for You.</h1>
+
+    <div class="container">
+        <div class="progress-bar">
+            <div class="step active">Identity</div>
+            <div class="step">Contact</div>
+            <div class="step">Demographics</div>
+            <div class="step">Finance</div>
+        </div>
+
+        <form id="multiStepForm">
+            <div class="form-step active">
+                <label>Full Name</label>
+                <input type="text" id="fullName" required>
+                <label>Gender</label>
+                <select id="gender">
+                    <option value="">Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+                <label>Age</label>
+                <input type="number" id="age" required>
+            </div>
+
+            <div class="form-step">
+                <label>Phone Number</label>
+                <input type="text" id="phone">
+                <label>Email Address</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="form-step">
+                <label>Aadhar Number</label>
+                <input type="text" id="aadhar">
+                <label>Residential Address</label>
+                <textarea id="address"></textarea>
+                <div id="parentInfo" style="display:none">
+                    <label>Guardian Name</label>
+                    <input type="text" id="guardian">
+                    <label>Guardian Phone</label>
+                    <input type="text" id="guardianPhone">
+                </div>
+            </div>
+
+            <div class="form-step">
+                <label>Bank Name</label>
+                <input type="text" id="bankName">
+                <label>Account Number</label>
+                <input type="text" id="accountNumber">
+                <label>IFSC Code</label>
+                <input type="text" id="ifsc">
+                <label>Branch Address</label>
+                <textarea id="branch"></textarea>
+                <label>Select Avatar</label>
+                <div class="avatars">
+                    <div class="avatar-card" onclick="selectAvatar(this)">
+                        <img src="img/avatar1.jpg">
+                    </div>
+                    <div class="avatar-card" onclick="selectAvatar(this)">
+                        <img src="img/avatar2.jpg">
+                    </div>
+                    <div class="avatar-card" onclick="selectAvatar(this)">
+                        <img src="img/avatar3.jpg">
+                    </div>
+                    <div class="avatar-card" onclick="selectAvatar(this)">
+                        <img src="img/avatar4.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </form>
+
+        <div class="profile-card" id="profileCard">
+            <div class="completion-meter">
+                <div class="completion-meter-inner"></div>
+            </div>
+            <img id="profileAvatar" src="">
+            <div class="info-line"><i class="fas fa-user"></i><span id="outName"></span></div>
+            <div class="info-line"><i class="fas fa-venus-mars"></i><span id="outGender"></span></div>
+            <div class="info-line"><i class="fas fa-birthday-cake"></i><span id="outAge"></span></div>
+            <div class="info-line"><i class="fas fa-phone"></i><span id="outPhone"></span></div>
+            <div class="info-line"><i class="fas fa-envelope"></i><span id="outEmail"></span></div>
+            <div class="info-line"><i class="fas fa-id-card"></i><span id="outAadhar"></span></div>
+            <div class="info-line"><i class="fas fa-home"></i><span id="outAddress"></span></div>
+            <div class="info-line"><i class="fas fa-user-shield"></i><span id="outGuardian"></span></div>
+            <div class="info-line"><i class="fas fa-landmark"></i><span id="outBank"></span></div>
+            <button onclick="location.reload()">Edit Info</button>
+        </div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script>
+        const steps = document.querySelectorAll('.form-step');
+        const stepBtns = document.querySelectorAll('.step');
+        let currentStep = 0;
+        let avatarSrc = '';
+
+        const updateStepView = () => {
+            steps.forEach((s, i) => s.classList.toggle('active', i === currentStep));
+            stepBtns.forEach((btn, i) => btn.classList.toggle('active', i === currentStep));
+            if (currentStep === steps.length - 1) document.querySelector('.buttons button:last-child').textContent = 'Submit';
+            else document.querySelector('.buttons button:last-child').textContent = 'Next';
+        }
+
+        const nextStep = () => {
+            const age = parseInt(document.getElementById('age').value);
+            document.getElementById('parentInfo').style.display = age < 18 ? 'block' : 'none';
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateStepView();
+            } else {
+                showProfile();
+            }
+        }
+
+        const prevStep = () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStepView();
+            }
+        }
+
+        function selectAvatar(el) {
+            document.querySelectorAll('.avatar-card').forEach(card => card.classList.remove('selected'));
+            el.classList.add('selected');
+            avatarSrc = el.querySelector('img').src;
+        }
+
+        function showProfile() {
+            document.getElementById('multiStepForm').style.display = 'none';
+            document.getElementById('profileCard').style.display = 'block';
+            document.getElementById('profileAvatar').src = avatarSrc;
+            document.getElementById('outName').innerText = document.getElementById('fullName').value;
+            document.getElementById('outGender').innerText = document.getElementById('gender').value;
+            document.getElementById('outAge').innerText = document.getElementById('age').value;
+            document.getElementById('outPhone').innerText = document.getElementById('phone').value;
+            document.getElementById('outEmail').innerText = document.getElementById('email').value;
+            document.getElementById('outAadhar').innerText = document.getElementById('aadhar').value;
+            document.getElementById('outAddress').innerText = document.getElementById('address').value;
+            document.getElementById('outGuardian').innerText = document.getElementById('guardian').value + ' / ' + document.getElementById('guardianPhone').value;
+            document.getElementById('outBank').innerText = `${document.getElementById('bankName').value}, ${document.getElementById('accountNumber').value}, ${document.getElementById('ifsc').value}, ${document.getElementById('branch').value}`;
+        }
+
+        updateStepView();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

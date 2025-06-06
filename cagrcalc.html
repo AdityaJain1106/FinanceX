@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+
+  <title>CAGR Calculator</title>
+  <style>
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    h1 {
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #264391;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #264391;
+      color: white;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #264391;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .result h3 {
+      margin-bottom: 10px;
+      color: #264391;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div>
+    <nav class="navbar">
+      <div class="logo">FinanceX</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="learnzone.html">LearnZone</a></li>
+        <li><a href="news.html">LiveAnalytics</a></li>
+        <li><a href="filter.html">DecideX</a></li>
+        <li><a href="smartcalc.html">SmartCal-C</a></li>
+        <li><a href="chatbot.html">FinSight</a></li>
+        <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="profile-icon">
+        <div class="dropdown">
+          <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+          <div class="dropdown-content">
+            <a href="#">English</a>
+            <a href="#">Spanish</a>
+            <a href="#">French</a>
+            <a href="#">German</a>
+            <a href="#">Hindi</a>
+          </div>
+        </div>
+        <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile"></a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="parent-container">
+    <div class="container">
+      <h1>CAGR Calculator</h1>
+      <div class="input-group">
+        <label for="initialValue">Initial Value (₹):</label>
+        <input type="number" id="initialValue" placeholder="e.g. 10000">
+      </div>
+      <div class="input-group">
+        <label for="finalValue">Final Value (₹):</label>
+        <input type="number" id="finalValue" placeholder="e.g. 20000">
+      </div>
+      <div class="input-group">
+        <label for="years">Number of Years:</label>
+        <input type="number" id="years" placeholder="e.g. 3">
+      </div>
+      <button onclick="calculateCAGR()">Calculate CAGR</button>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+  <script>
+    function calculateCAGR() {
+      const initialValue = parseFloat(document.getElementById("initialValue").value);
+      const finalValue = parseFloat(document.getElementById("finalValue").value);
+      const years = parseFloat(document.getElementById("years").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(initialValue) || isNaN(finalValue) || isNaN(years) ||
+        initialValue <= 0 || finalValue <= 0 || years <= 0) {
+        resultDiv.innerHTML = "<p class='error'>Please enter valid positive numbers for all fields.</p>";
+        return;
+      }
+
+      const cagr = (Math.pow(finalValue / initialValue, 1 / years) - 1) * 100;
+
+      resultDiv.innerHTML = `
+        <h3>Results</h3>
+        <p>Compound Annual Growth Rate (CAGR): <strong>${cagr.toFixed(2)}%</strong></p>
+        <p>Years Considered: <strong>${years}</strong></p>
+      `;
+    }
+
+  </script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

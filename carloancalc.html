@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Car Loan Calculator</title>
+  <style>
+    .calculator {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 480px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #264391;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #264391;
+      color: white;
+      border: none;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: #264391;
+    }
+
+    .results {
+      margin-top: 25px;
+      padding: 20px;
+      background: #f1f8ff;
+      border-left: 5px solid #007bff;
+      border-radius: 6px;
+    }
+
+    .results p {
+      margin: 10px 0;
+    }
+
+    .highlight {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <nav class="navbar">
+      <div class="logo">FinanceX</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="learnzone.html">LearnZone</a></li>
+        <li><a href="news.html">LiveAnalytics</a></li>
+        <li><a href="filter.html">DecideX</a></li>
+        <li><a href="smartcalc.html">SmartCal-C</a></li>
+        <li><a href="chatbot.html">FinSight</a></li>
+        <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+      </ul>
+      <div class="profile-icon">
+        <div class="dropdown">
+          <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+          <div class="dropdown-content">
+            <a href="#">English</a>
+            <a href="#">Spanish</a>
+            <a href="#">French</a>
+            <a href="#">German</a>
+            <a href="#">Hindi</a>
+          </div>
+        </div>
+        <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile"></a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+
+
+
+  <div class="parent-container">
+    <div class="calculator">
+      <h2>Car Loan Calculator</h2>
+
+      <div class="input-group">
+        <label for="price">Car On-Road Price (₹):</label>
+        <input type="number" id="price" placeholder="e.g. 800000">
+      </div>
+
+      <div class="input-group">
+        <label for="income">Monthly Income (₹):</label>
+        <input type="number" id="income" placeholder="e.g. 60000">
+      </div>
+
+      <div class="input-group">
+        <label for="interest">Interest Rate on Car Loan (%):</label>
+        <input type="number" id="interest" placeholder="e.g. 9.5">
+      </div>
+
+      <button onclick="calculateLoan()">Calculate</button>
+
+      <div class="results" id="results" style="display: none;">
+        <h3>Result</h3>
+        <p id="downPayment"></p>
+        <p id="loanTenure"></p>
+        <p id="loanAmount"></p>
+        <p id="monthlyEMI"></p>
+        <p id="totalInterest"></p>
+        <p id="income10"></p>
+        <p id="income30"></p>
+        <p id="surplus10"></p>
+        <p id="surplus30"></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+  <script>
+    function calculateLoan() {
+      const price = parseFloat(document.getElementById('price').value);
+      const income = parseFloat(document.getElementById('income').value);
+      const interest = parseFloat(document.getElementById('interest').value);
+
+      if (isNaN(price) || isNaN(income) || isNaN(interest)) return;
+
+      const downPayment = price * 0.20;
+      const loanAmount = price * 0.80;
+      const years = 4;
+      const months = years * 12;
+      const monthlyRate = interest / 12 / 100;
+
+      const emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+        (Math.pow(1 + monthlyRate, months) - 1);
+
+      const totalPayment = emi * months;
+      const totalInterest = totalPayment - loanAmount;
+
+      const income10 = income * 0.10;
+      const income30 = income * 0.30;
+      const surplus10 = income10 - emi;
+      const surplus30 = income30 - emi;
+
+      document.getElementById("downPayment").innerHTML = `<span class="highlight">Down Payment (20%):</span> ₹ ${downPayment.toLocaleString()}`;
+      document.getElementById("loanTenure").innerHTML = `<span class="highlight">Loan Tenure:</span> 4 years (fixed)`;
+      document.getElementById("loanAmount").innerHTML = `<span class="highlight">Loan Amount:</span> ₹ ${loanAmount.toLocaleString()}`;
+      document.getElementById("monthlyEMI").innerHTML = `<span class="highlight">Monthly EMI:</span> ₹ ${emi.toFixed(0).toLocaleString()}`;
+      document.getElementById("totalInterest").innerHTML = `<span class="highlight">Total Interest Payable:</span> ₹ ${totalInterest.toFixed(0).toLocaleString()}`;
+      document.getElementById("income10").innerHTML = `<span class="highlight">10% of Monthly Income:</span> ₹ ${income10.toLocaleString()}`;
+      document.getElementById("income30").innerHTML = `<span class="highlight">30% of Monthly Income:</span> ₹ ${income30.toLocaleString()}`;
+      document.getElementById("surplus10").innerHTML = `<span class="highlight">Surplus/(Deficit) at 10% Allocation:</span> ₹ ${surplus10.toFixed(0).toLocaleString()}`;
+      document.getElementById("surplus30").innerHTML = `<span class="highlight">Surplus/(Deficit) at 30% Allocation:</span> ₹ ${surplus30.toFixed(0).toLocaleString()}`;
+
+      document.getElementById("results").style.display = "block";
+
+
+    }
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
