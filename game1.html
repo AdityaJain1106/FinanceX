@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Term Tycoon | FinanceX</title>
+</head>
+
+
+<style>
+    .game-container {
+        max-width: 800px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .game-main {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
+    }
+
+    .game-header {
+        text-align: center;
+    }
+
+    .game-header h1 {
+        color: #264391;
+    }
+
+    .terms,
+    .definitions {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .term {
+        background: #264391;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: grab;
+    }
+
+    .dropzone {
+        background: #e8ecf4;
+        padding: 15px;
+        border: 2px dashed #264391;
+        border-radius: 8px;
+        min-height: 60px;
+    }
+
+    .dropzone.correct {
+        background-color: #c7f6c7;
+        border: 2px solid green;
+    }
+
+    .dropzone.wrong {
+        background-color: #f6c7c7;
+        border: 2px solid red;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    button {
+        background-color: #264391;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    button:hover {
+        background-color: #1a2d66;
+    }
+</style>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🧠 Term Tycoon</h1>
+            <br>
+            <p>Drag the financial term onto its correct definition.</p>
+        </div>
+
+        <div class="game-main">
+            <div class="terms" id="terms"></div>
+            <div class="definitions" id="definitions"></div>
+        </div>
+
+        <div id="result"></div>
+
+        <div class="controls">
+            <button id="nextRoundBtn" style="display: none;">Next Round ➡️</button>
+            <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+        </div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+    <script>
+        const termsContainer = document.getElementById('terms');
+        const definitionsContainer = document.getElementById('definitions');
+        const result = document.getElementById('result');
+        const nextRoundBtn = document.getElementById('nextRoundBtn');
+        const exitBtn = document.getElementById('exitBtn');
+
+        let currentRound = 0;
+        const termsPerRound = 5;
+        let shuffledTerms = Object.entries(descriptions).sort(() => Math.random() - 0.5);
+
+        function loadRound(roundIndex) {
+            termsContainer.innerHTML = '';
+            definitionsContainer.innerHTML = '';
+            result.textContent = '';
+            nextRoundBtn.style.display = 'none';
+
+            let correctCount = 0;
+            const start = roundIndex * termsPerRound;
+            const end = start + termsPerRound;
+            const currentSet = shuffledTerms.slice(start, end);
+
+            currentSet.forEach(([term, definition], index) => {
+                const termDiv = document.createElement('div');
+                termDiv.className = 'term';
+                termDiv.textContent = term;
+                termDiv.id = `term-${start + index}`;
+                termDiv.setAttribute('draggable', true);
+                termDiv.setAttribute('data-term', term);
+                termsContainer.appendChild(termDiv);
+
+                termDiv.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', term);
+                });
+            });
+
+            const shuffledDefs = [...currentSet].sort(() => Math.random() - 0.5);
+            shuffledDefs.forEach(([term, definition]) => {
+                const dropZone = document.createElement('div');
+                dropZone.className = 'dropzone';
+                dropZone.textContent = definition;
+                dropZone.dataset.term = term;
+                definitionsContainer.appendChild(dropZone);
+
+                dropZone.addEventListener('dragover', (e) => e.preventDefault());
+
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const draggedTerm = e.dataTransfer.getData('text/plain');
+                    if (draggedTerm === dropZone.dataset.term) {
+                        dropZone.classList.add('correct');
+                        dropZone.textContent += ` ✅ (${draggedTerm})`;
+                        const draggedElement = document.querySelector(`[data-term="${draggedTerm}"]`);
+                        if (draggedElement) draggedElement.style.display = 'none';
+                        correctCount++;
+                        if (correctCount === currentSet.length) {
+                            result.textContent = "🎉 Well done! You completed this round!";
+                            if ((currentRound + 1) * termsPerRound < shuffledTerms.length) {
+                                nextRoundBtn.style.display = 'inline-block';
+                            } else {
+                                result.textContent += " 🏁 You've completed all terms!";
+                            }
+                        }
+                    } else {
+                        dropZone.classList.add('wrong');
+                        setTimeout(() => dropZone.classList.remove('wrong'), 1000);
+                    }
+                });
+            });
+        }
+
+        nextRoundBtn.addEventListener('click', () => {
+            currentRound++;
+            loadRound(currentRound);
+        });
+
+        exitBtn.addEventListener('click', () => {
+            window.location.href = "learnzone.html";
+        });
+
+        loadRound(currentRound);
+
+    </script>
+
+
+</body>
+
+</html>

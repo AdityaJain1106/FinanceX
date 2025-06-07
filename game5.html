@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Term Jumble | FinanceX</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+    .game-container {
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+
+
+    .jumble-box {
+        font-size: 2rem;
+        margin: 10px 0;
+        color: #2c3e50;
+        letter-spacing: 5px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+
+
+    button:hover {
+        background: #005fa3;
+    }
+
+    #feedback {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+
+
+    button {
+        padding: 10px 20px;
+        font-weight: 700;
+        background: #264391;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .controls button {
+        display: block;
+        margin: 10px auto 30px;
+        padding: 10px 20px;
+        font-weight: 700;
+        background: #264391;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        background: #264391;
+        cursor: not-allowed;
+    }
+
+    #exitBtn {
+        margin: 0%;
+    }
+
+    footer {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
+</style>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+
+    <div class="game-container">
+
+        <div class="container">
+            <h1>🧠 Term Jumble</h1>
+            <div class="jumble-box">
+                <p id="jumbled-word">Loading...</p>
+            </div>
+            <p id="hint">Hint: </p>
+            <br>
+
+            <input type="text" id="user-input" placeholder="Your guess..." autocomplete="off" />
+            <button onclick="checkAnswer()">Check</button>
+            <p id="feedback"></p>
+            <button onclick="nextWord()">Next Word</button>
+            <div class="controls">
+                <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const terms = [
+            { word: "budget", hint: "A financial plan that outlines expected income and expenses." },
+            { word: "asset", hint: "Something valuable owned by a person or company." },
+            { word: "credit", hint: "Money borrowed or the trust to repay it later." },
+            { word: "inflation", hint: "The general rise in prices over time." },
+            { word: "dividend", hint: "A portion of company profits paid to shareholders." },
+            { word: "equity", hint: "Ownership value in an asset or business." },
+            { word: "liability", hint: "Something you owe (e.g., loans, credit card debt)." },
+            { word: "net worth", hint: "Your total assets minus your total liabilities." },
+            { word: "income", hint: "Money you earn from work, investments, or other sources." },
+            { word: "expense", hint: "Money you spend on goods, services, or bills." },
+            { word: "savings", hint: "Money you set aside for future use." },
+            { word: "interest", hint: "The cost of borrowing money or the return on savings/investments." },
+            { word: "compound interest", hint: "Interest calculated on the initial amount and also on previous interest earned." },
+            { word: "sip", hint: "A method of investing a fixed sum regularly in a mutual fund." },
+            { word: "nav", hint: "Price of one unit of a mutual fund; changes daily." },
+            { word: "units", hint: "Mutual fund holdings are represented in units, bought based on NAV." },
+            { word: "mutual fund", hint: "A pool of money managed by professionals to invest in various securities." },
+            { word: "amc", hint: "Company that manages mutual funds." },
+            { word: "fund manager", hint: "The professional who makes investment decisions for the fund." },
+            { word: "scheme", hint: "A specific mutual fund offering under an AMC." },
+            { word: "roi", hint: "The percentage return from your investments." },
+            { word: "cagr", hint: "Average annual growth rate of investment." },
+            { word: "inventory", hint: "Goods a company holds for sale." },
+            { word: "joint account", hint: "A bank account owned by two or more people." },
+            { word: "leasing", hint: "Renting an asset for use without ownership." },
+            { word: "letter of credit", hint: "A guarantee from a bank for payments in trade." },
+            { word: "liquidity ratio", hint: "Measures ability to meet short-term obligations." },
+            { word: "ltv", hint: "Loan amount divided by appraised asset value." },
+            { word: "lock-in period", hint: "Time before which investments cannot be withdrawn." },
+            { word: "market capitalization", hint: "Total market value of a company’s shares." },
+            { word: "money market", hint: "Short-term debt trading market." },
+            { word: "monopoly", hint: "Market with a single seller." },
+            { word: "mortgage", hint: "A loan secured by real estate." },
+            { word: "negative balance", hint: "When expenses exceed account balance." },
+            { word: "nominal interest rate", hint: "The interest rate before inflation adjustment." },
+            { word: "npa", hint: "A loan where repayment is overdue." },
+            { word: "options contract", hint: "Right (not obligation) to buy or sell an asset later." },
+            { word: "otc", hint: "Trading outside formal exchanges." },
+            { word: "par value", hint: "The face value of a bond or stock." },
+            { word: "pension fund", hint: "A fund set aside to pay retiree benefits." },
+            { word: "portfolio rebalancing", hint: "Adjusting asset allocation to maintain goals." },
+            { word: "pre-tax income", hint: "Income before taxes are deducted." },
+            { word: "principal", hint: "The original amount of money borrowed or invested." },
+            { word: "quick ratio", hint: "Measures ability to pay liabilities with liquid assets." },
+            { word: "redemption", hint: "Selling or repaying an investment." },
+            { word: "roe", hint: "Profitability relative to shareholders’ equity." },
+            { word: "reverse mortgage", hint: "A loan for seniors against home equity, paid later." },
+            { word: "secured loan", hint: "A loan backed by collateral." },
+            { word: "systematic risk", hint: "Risk affecting the entire market." },
+            { word: "yield", hint: "Earnings from an investment over time, typically expressed as a percentage." },
+            { word: "custodian bank", hint: "A financial institution that holds securities for safekeeping." },
+            { word: "day trading", hint: "Buying and selling stocks within the same day." },
+            { word: "dti", hint: "Compares monthly debt payments to gross income." },
+            { word: "depreciation", hint: "The decrease in value of an asset over time." },
+            { word: "digital wallet", hint: "Electronic method of storing payment details (e.g., Google Pay)." },
+            { word: "direct deposit", hint: "Employer transfers salary directly into your bank account." },
+            { word: "discount rate", hint: "The interest rate the central bank charges commercial banks." },
+            { word: "dividend yield", hint: "Dividend per share divided by price per share." },
+            { word: "dow jones", hint: "A stock market index of 30 large U.S. companies." },
+            { word: "early withdrawal penalty", hint: "Fee for withdrawing money from a retirement account early." },
+            { word: "eps", hint: "Company’s profit divided by outstanding shares." },
+            { word: "economic indicator", hint: "Data used to assess the health of the economy." },
+            { word: "escrow account", hint: "Temporary account where funds are held until a condition is met." },
+            { word: "ex-dividend date", hint: "The date after which a stock is bought without a dividend." },
+            { word: "exchange rate", hint: "Value of one currency in relation to another." },
+            { word: "expense ratio", hint: "Annual fee charged by mutual funds, expressed as a percentage." },
+            { word: "fico score", hint: "A popular credit score model in the U.S." },
+            { word: "financial year", hint: "A 12-month period used for accounting (April–March in India)." },
+            { word: "fixed asset", hint: "Long-term physical assets like buildings or land." },
+            { word: "forex", hint: "Global market for trading currencies." },
+            { word: "futures contract", hint: "An agreement to buy/sell an asset at a future date." },
+            { word: "gaap", hint: "Standard accounting rules." },
+            { word: "grace period", hint: "Time during which no interest or penalty is charged." },
+            { word: "gross income", hint: "Total income before taxes and deductions." },
+            { word: "growth stock", hint: "A stock expected to grow faster than the market." },
+            { word: "guarantor", hint: "A person who agrees to repay a loan if the borrower can’t." },
+            { word: "holding period", hint: "Time you own an investment before selling." },
+            { word: "idle money", hint: "Cash that is not earning any return." },
+            { word: "index fund", hint: "A fund that tracks a stock market index." },
+            { word: "inflation index bond", hint: "Bond adjusted for inflation." },
+            { word: "installment", hint: "A fixed payment made periodically to repay a loan." },
+            { word: "interest coverage ratio", hint: "Measures a firm’s ability to pay interest." },
+            { word: "irr", hint: "Discount rate that makes net present value zero." },
+            { word: "insolvency", hint: "Inability to pay debts when due." }
+
+
+        ];
+
+        let currentWord = {};
+        let shuffled = "";
+
+        function shuffleWord(word) {
+            return word.split("").sort(() => 0.5 - Math.random()).join("");
+        }
+
+        function nextWord() {
+            const random = terms[Math.floor(Math.random() * terms.length)];
+            currentWord = random;
+            shuffled = shuffleWord(currentWord.word);
+
+            while (shuffled === currentWord.word) {
+                shuffled = shuffleWord(currentWord.word);
+            }
+
+            document.getElementById("jumbled-word").textContent = shuffled.toUpperCase();
+            document.getElementById("hint").textContent = "Hint: " + currentWord.hint;
+            document.getElementById("user-input").value = "";
+            document.getElementById("feedback").textContent = "";
+        }
+
+        function checkAnswer() {
+            const guess = document.getElementById("user-input").value.trim().toLowerCase();
+            const feedback = document.getElementById("feedback");
+
+            if (guess === currentWord.word) {
+                feedback.textContent = "✅ Correct!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "❌ Try again!";
+                feedback.style.color = "red";
+            }
+        }
+
+        window.onload = nextWord;
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Budget Builder Challenge | FinanceX</title>
+    <style>
+        .game-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #264391;
+        }
+
+        .income {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .categories {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f4f8;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .category label {
+            width: 110px;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .amount {
+            width: 60px;
+            text-align: right;
+        }
+
+        .progress-bar {
+            height: 15px;
+            border-radius: 7px;
+            background: #ddd;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #111f42;
+            transition: width 0.3s ease;
+        }
+
+        .status {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .status.good {
+            color: green;
+        }
+
+        .status.warning {
+            color: orange;
+        }
+
+        .status.over {
+            color: red;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto 30px;
+            padding: 10px 20px;
+            font-weight: 700;
+            background: #264391;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #264391;
+            cursor: not-allowed;
+        }
+
+        .summary {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+        }
+
+        .pie-chart {
+            max-width: 250px;
+            margin: 15px auto;
+        }
+
+        .tip {
+            font-size: 0.9em;
+            color: #264391;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            background-color: #264391;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            background-color: #264391;
+        }
+
+        input[type=range]::-ms-thumb {
+            background-color: #264391;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+
+    <div class="game-container">
+
+        <h1>📊 Budget Builder Challenge</h1>
+        <br>
+        <div class="income">Monthly Income: ₹<span id="income">50000</span></div>
+
+        <div id="categories" class="categories">
+        </div>
+        <br>
+        <div class="progress-bar" aria-label="Budget allocation progress">
+            <div class="progress-fill" id="progressFill"></div>
+            <h6 style="text-align: center;">Progress Bar:</h6>
+        </div>
+
+
+        <div class="status" id="statusText"></div>
+
+        <button id="surpriseBtn" disabled>Reveal Surprise Event</button>
+
+        <div id="surpriseEvent" style="text-align:center; font-weight:bold; margin: 15px 0; color:#d32f2f;"></div>
+
+        <button id="showSummaryBtn" disabled>Show Summary & Score</button>
+
+        <div class="controls">
+            <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+        </div>
+    </div>
+
+    <div id="summary" class="summary" style="display:none;">
+        <div><strong>Score:</strong> <span id="score"></span>/100</div>
+        <canvas id="pieChart" class="pie-chart" width="250" height="250"></canvas>
+        <div class="tip" id="suggestion"></div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+    <script>
+        (() => {
+            const income = 50000;
+            const categories = [
+                { name: "Rent", min: 0, max: 30000 },
+                { name: "Food", min: 0, max: 15000 },
+                { name: "Transport", min: 0, max: 10000 },
+                { name: "Utilities", min: 0, max: 10000 },
+                { name: "Savings", min: 0, max: income },
+                { name: "Entertainment", min: 0, max: 10000 },
+                { name: "Miscellaneous", min: 0, max: 10000 }
+            ];
+
+            const categoryValues = {};
+            let surpriseActive = false;
+
+            const categoriesDiv = document.getElementById('categories');
+            const progressFill = document.getElementById('progressFill');
+            const statusText = document.getElementById('statusText');
+            const surpriseBtn = document.getElementById('surpriseBtn');
+            const surpriseEventDiv = document.getElementById('surpriseEvent');
+            const showSummaryBtn = document.getElementById('showSummaryBtn');
+            const summaryDiv = document.getElementById('summary');
+            const scoreSpan = document.getElementById('score');
+            const suggestionDiv = document.getElementById('suggestion');
+            const pieCanvas = document.getElementById('pieChart');
+            const ctx = pieCanvas.getContext('2d');
+
+            categories.forEach(cat => {
+                const div = document.createElement('div');
+                div.className = 'category';
+                div.innerHTML = `
+      <label for="${cat.name}">${cat.name}</label>
+      <input type="range" id="${cat.name}" min="${cat.min}" max="${cat.max}" value="0" step="100" />
+      <input type="number" id="${cat.name}Input" class="amount" min="${cat.min}" max="${cat.max}" value="0" step="100" />
+    `;
+                categoriesDiv.appendChild(div);
+                categoryValues[cat.name] = 0;
+
+                const slider = div.querySelector(`#${cat.name}`);
+                const input = div.querySelector(`#${cat.name}Input`);
+
+                slider.oninput = () => {
+                    input.value = slider.value;
+                    updateValues(cat.name, Number(slider.value));
+                };
+                input.oninput = () => {
+                    let val = Number(input.value);
+                    if (val > cat.max) val = cat.max;
+                    if (val < cat.min) val = cat.min;
+                    input.value = val;
+                    slider.value = val;
+                    updateValues(cat.name, val);
+                };
+            });
+
+            function updateValues(changedCat, val) {
+                categoryValues[changedCat] = val;
+                updateUI();
+            }
+
+            function updateUI() {
+                const total = Object.values(categoryValues).reduce((a, b) => a + b, 0);
+                const percent = Math.min(100, (total / income) * 100);
+                progressFill.style.width = percent + '%';
+
+                if (total > income) {
+                    progressFill.style.background = '#d32f2f';
+                    statusText.textContent = `Over budget by ₹${total - income}`;
+                    statusText.className = 'status over';
+                    surpriseBtn.disabled = true;
+                    showSummaryBtn.disabled = true;
+                } else {
+                    surpriseBtn.disabled = false;
+                    showSummaryBtn.disabled = false;
+                    if (categoryValues["Savings"] < 0.2 * income) {
+                        progressFill.style.background = '#fbc02d';
+                        statusText.textContent = "Warning: Savings below recommended 20%";
+                        statusText.className = 'status warning';
+                    } else {
+                        progressFill.style.background = '#388e3c';
+                        statusText.textContent = `Total allocated: ₹${total} / ₹${income}`;
+                        statusText.className = 'status good';
+                    }
+                }
+            }
+
+            surpriseBtn.onclick = () => {
+                if (surpriseActive) return;
+                surpriseActive = true;
+
+                const events = [
+                    { text: "Car needs repairs ₹5,000", impact: { Transport: 5000 } },
+                    {
+                        text: "Utility bill increased by 10%", impact: (vals) => {
+                            const oldVal = vals["Utilities"] || 0;
+                            return { Utilities: Math.round(oldVal * 0.1) };
+                        }
+                    },
+                    { text: "Bonus received ₹3,000", impact: { Bonus: 3000 } }
+                ];
+
+                const event = events[Math.floor(Math.random() * events.length)];
+                surpriseEventDiv.textContent = event.text;
+
+                if (typeof event.impact === "function") {
+                    const inc = event.impact(categoryValues);
+                    for (const k in inc) {
+                        if (categoryValues[k] !== undefined) categoryValues[k] += inc[k];
+                    }
+                } else {
+                    for (const k in event.impact) {
+                        if (categoryValues[k] !== undefined) categoryValues[k] += event.impact[k];
+                    }
+                }
+
+                categories.forEach(cat => {
+                    if (categoryValues[cat.name] > cat.max) categoryValues[cat.name] = cat.max;
+                    const slider = document.getElementById(cat.name);
+                    const input = document.getElementById(cat.name + "Input");
+                    slider.value = categoryValues[cat.name];
+                    input.value = categoryValues[cat.name];
+                });
+                updateUI();
+            };
+
+            showSummaryBtn.onclick = () => {
+                const total = Object.values(categoryValues).reduce((a, b) => a + b, 0);
+
+                let score = 100;
+                if (total > income) score -= 50;
+                if (categoryValues["Savings"] < 0.2 * income) score -= 30;
+                if (categoryValues["Entertainment"] > 0.3 * income) score -= 20;
+
+                score = Math.max(0, score);
+
+                scoreSpan.textContent = score;
+
+                if (categoryValues["Savings"] < 0.2 * income) {
+                    suggestionDiv.textContent = "Tip: Increase your savings to at least 20% for emergencies.";
+                } else if (total > income) {
+                    suggestionDiv.textContent = "Tip: Reduce expenses to not exceed your income.";
+                } else {
+                    suggestionDiv.textContent = "Great job! Your budget looks balanced.";
+                }
+
+                drawPieChart(categoryValues);
+
+                summaryDiv.style.display = 'block';
+            };
+
+            function drawPieChart(data) {
+                ctx.clearRect(0, 0, pieCanvas.width, pieCanvas.height);
+                const total = Object.values(data).reduce((a, b) => a + b, 0);
+                let startAngle = 0;
+
+                const colors = {
+                    Rent: '#3a86ff',
+                    Food: '#8338ec',
+                    Transport: '#ff006e',
+                    Utilities: '#fb5607',
+                    Savings: '#ffbe0b',
+                    Entertainment: '#8ac926',
+                    Miscellaneous: '#1982c4',
+                    Bonus: '#6a4c93'
+                };
+
+                for (const cat of Object.keys(data)) {
+                    const val = data[cat];
+                    if (val <= 0) continue;
+                    const sliceAngle = (val / total) * 2 * Math.PI;
+                    ctx.beginPath();
+                    ctx.moveTo(pieCanvas.width / 2, pieCanvas.height / 2);
+                    ctx.arc(pieCanvas.width / 2, pieCanvas.height / 2, pieCanvas.height / 2 - 10, startAngle, startAngle + sliceAngle);
+                    ctx.closePath();
+                    ctx.fillStyle = colors[cat] || '#ccc';
+                    ctx.fill();
+
+                    startAngle += sliceAngle;
+                }
+            }
+
+            updateUI();
+        })();
+    </script>
+
+</body>
+
+</html>

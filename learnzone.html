@@ -77,6 +77,64 @@
             color: #264391;
         }
 
+        .games-container {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 60px;
+            margin: 20px 100px 50px 100px;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        @media screen and (max-width: 768px) {
+            .games-container {
+                margin: 20px 0px;
+                gap: 20px;
+            }
+        }
+
+        .box {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 370px;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .box:hover img {
+            transform: rotate(-5deg);
+        }
+
+        .box img {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .box h2 {
+            font-size: 18px;
+            margin: 10px 0 5px;
+            color: #264391;
+        }
+
+        .box p {
+            font-size: 14px;
+            color: #666;
+            flex-grow: 1;
+        }
+
         @media (max-width: 600px) {
             .container {
                 flex-direction: column;
@@ -469,6 +527,64 @@
             </div>
             <div class="description" id="descriptionBox">
                 <p>Select a word or start typing to see its description.</p>
+            </div>
+        </div>
+
+        <div>
+            <h1 class="main-heading">Learn & Earn Arcade</h1>
+
+            <div class="games-container">
+                <a href="game1.html">
+                    <div class="box">
+                        <img src="img/game1.png"
+                            alt="Icon">
+                        <h2>Term Tycoon</h2>
+                    </div>
+                </a>
+
+                <a href="game2.html">
+                    <div class="box">
+                        <img src="img/game2.png"
+                            alt="Icon">
+                        <h2>Budget Builder Challenge</h2>
+                    </div>
+                </a>
+
+                <a href="game3.html">
+                    <div class="box">
+                        <img src="img/game3.png"
+                            alt="Icon">
+                        <h2>Flash Finance</h2>
+                    </div>
+                </a>
+
+                <a href="game4.html">
+                    <div class="box">
+                        <img src="img/game4.png"
+                            alt="Icon">
+                        <h2>Investor's Island</h2>
+                    </div>
+                </a>
+
+                <a href="game5.html">
+                    <div class="box">
+                        <img src="img/game5.png"
+                            alt="Icon">
+                        <h2>Term Jumble</h2>
+                    </div>
+                </a>
+
+                <a href="game6.html">
+                    <div class="box">
+                        <img src="img/game6.png"
+                            alt="Icon">
+                        <h2>Market Mayhem</h2>
+                    </div>
+                </a>
+
+                
+
+                
             </div>
         </div>
     </main>

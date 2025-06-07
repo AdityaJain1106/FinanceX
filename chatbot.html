@@ -146,6 +146,23 @@
         text-align: left;
       }
     }
+
+    .hero {
+      background-image: url('your-image.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #de9f6f;
+      padding-left: 15px;
+    }
+
+    .text-box {
+      padding: 20px;
+      border-radius: 10px;
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -188,7 +205,13 @@
 
   <h1 class="main-heading">Finance FAQ Bot</h1>
   <div class="container">
-    <div class="chat-box" id="chat-box"></div>
+    <div class="chat-box" id="chat-box">
+      <div class="hero">
+        <div class="text-box">
+          <h1>Ask Your Finance Questions – I’m Listening.</h1>
+        </div>
+      </div>
+    </div>
     <div class="input-box">
       <div class="input-area">
         <input type="text" id="user-input" placeholder="Ask a question..." oninput="showSuggestions()"
@@ -218,6 +241,7 @@
   </footer>
 
 
+  <script src="script.js"></script>
   <script src="script4.js"></script>
 </body>
 

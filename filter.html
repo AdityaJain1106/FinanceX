@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <title>DecideX | FinanceX</title>
     <style>
+        .navbar {
+            z-index: 2;
+        }
 
         main {
             margin: 0px 40px 40px 40px;
@@ -86,6 +89,7 @@
             text-align: center;
             font-size: 18px;
         }
+
         .bank-box:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -131,6 +135,7 @@
             box-shadow: 0 0 10px #333;
             z-index: 10;
         }
+
 
         #dialog h3 {
             margin-top: 0;
@@ -204,6 +209,7 @@
                 height: 800px;
                 overflow-x: auto;
             }
+
             .bank-container {
                 display: flex;
                 justify-content: space-evenly;
@@ -398,6 +404,30 @@
             "Credit Card Fee ≤ ₹500": 5,
             "Net Banking": 6
         };
+
+
+        const bankImageLinks = {
+            "State Bank of India": "https://www.onlinesbi.sbi/",
+            "Bank of Baroda": "https://www.bankofbaroda.in/",
+            "Bank of India": "https://www.bankofindia.co.in/",
+            "Canara Bank": "https://www.canarabank.com/"
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const bankImages = document.querySelectorAll("#banks img");
+
+            bankImages.forEach(img => {
+                const bankName = img.alt?.trim(); // image should have alt="State Bank of India" etc.
+                if (bankImageLinks[bankName]) {
+                    img.style.cursor = "pointer";
+                    img.addEventListener("click", (e) => {
+                        e.stopPropagation(); // prevent box click if any
+                        window.open(bankImageLinks[bankName], "_blank");
+                    });
+                }
+            });
+        });
+
 
         const tableBody = document.getElementById("tableBody");
         const tagSelect = document.getElementById("tag");

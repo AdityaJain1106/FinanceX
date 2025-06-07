@@ -40,8 +40,8 @@ a {
 }
 
 .navbar {
-            height: 80px;
-        }
+    height: 80px;
+}
 
 
 .main-heading {
@@ -218,4 +218,11 @@ a {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }

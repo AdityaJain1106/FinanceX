@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Investor's Island | FinanceX</title>
+    <style>
+        .game-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            color: black;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .header h1 {
+            color: #264391;
+        }
+
+        .slider-container {
+            margin-bottom: 1rem;
+        }
+
+        .slider-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        button {
+            background: #264391;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #1e2c6b;
+        }
+
+        button:disabled {
+            background-color: #264391;
+            cursor: not-allowed;
+        }
+
+        .results {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #eef1f9;
+            border-left: 5px solid #264391;
+        }
+
+        #chartContainer {
+            margin-top: 1rem;
+            height: 250px;
+            width: 100%;
+        }
+
+        .summary {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #d9e6ff;
+            border-radius: 6px;
+            color: #264391;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            background-color: #264391;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            background-color: #264391;
+        }
+
+        input[type=range]::-ms-thumb {
+            background-color: #264391;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+
+    <div class="game-container">
+        <div class="container">
+            <div class="header">
+                <h1>💼 Investor's Island</h1>
+                <br>
+                <p>Simulate, Learn, and Grow Your Wealth</p>
+                <br>
+                <h2>Allocate Your ₹1,00,000</h2>
+            </div>
+
+            <div class="slider-container">
+                <label>Stocks: <span id="stockValue">0</span>%</label>
+                <input type="range" id="stocks" min="0" max="100" value="0" oninput="updateSliders()" />
+            </div>
+
+            <div class="slider-container">
+                <label>Bonds: <span id="bondsValue">0</span>%</label>
+                <input type="range" id="bonds" min="0" max="100" value="0" oninput="updateSliders()" />
+            </div>
+
+            <div class="slider-container">
+                <label>Real Estate: <span id="realEstateValue">0</span>%</label>
+                <input type="range" id="realEstate" min="0" max="100" value="0" oninput="updateSliders()" />
+            </div>
+
+            <div class="slider-container">
+                <label>Crypto: <span id="cryptoValue">0</span>%</label>
+                <input type="range" id="crypto" min="0" max="100" value="0" oninput="updateSliders()" />
+            </div>
+
+            <p><strong>Total Allocation:</strong> <span id="total">0%</span></p>
+
+            <button id="startBtn" onclick="startSimulation()">Start Simulation</button>
+            <button id="nextYearBtn" onclick="simulateYear()" disabled>Simulate Next Year</button>
+            <button id="resetBtn" onclick="resetGame()" disabled>Reset Game</button>
+            <div class="controls">
+                <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+            </div>
+
+            <div class="results" id="results"></div>
+            <canvas id="portfolioChart"></canvas>
+            <div class="summary" id="summary"></div>
+        </div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script>
+        let portfolioValue = 100000;
+        let year = 0;
+        let allocation = {};
+        let history = [];
+        const totalDisplay = document.getElementById("total");
+        const resultDiv = document.getElementById("results");
+        const summaryDiv = document.getElementById("summary");
+
+        const ctx = document.getElementById("portfolioChart").getContext("2d");
+        let portfolioChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Portfolio Value (₹)",
+                        data: [],
+                        borderColor: "#264391",
+                        fill: false,
+                        tension: 0.3,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function (value) {
+                                return "₹" + value.toLocaleString();
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        function updateSliders() {
+            let stocks = parseInt(document.getElementById("stocks").value);
+            let bonds = parseInt(document.getElementById("bonds").value);
+            let realEstate = parseInt(document.getElementById("realEstate").value);
+            let crypto = parseInt(document.getElementById("crypto").value);
+
+            document.getElementById("stockValue").textContent = stocks;
+            document.getElementById("bondsValue").textContent = bonds;
+            document.getElementById("realEstateValue").textContent = realEstate;
+            document.getElementById("cryptoValue").textContent = crypto;
+
+            let total = stocks + bonds + realEstate + crypto;
+            totalDisplay.textContent = total + "%";
+
+            totalDisplay.style.color = total === 100 ? "green" : "red";
+        }
+
+        function startSimulation() {
+            let stocks = parseInt(document.getElementById("stocks").value);
+            let bonds = parseInt(document.getElementById("bonds").value);
+            let realEstate = parseInt(document.getElementById("realEstate").value);
+            let crypto = parseInt(document.getElementById("crypto").value);
+            let total = stocks + bonds + realEstate + crypto;
+
+            if (total !== 100) {
+                alert("Total allocation must be exactly 100%!");
+                return;
+            }
+
+            allocation = { stocks, bonds, realEstate, crypto };
+            portfolioValue = 100000;
+            year = 0;
+            history = [portfolioValue];
+
+            toggleInputs(false);
+
+            document.getElementById("nextYearBtn").disabled = false;
+            document.getElementById("resetBtn").disabled = false;
+
+            portfolioChart.data.labels = ["Year 0"];
+            portfolioChart.data.datasets[0].data = [portfolioValue];
+            portfolioChart.update();
+            summaryDiv.textContent = "";
+            resultDiv.innerHTML = `<p>Simulation started with ₹100,000 allocated as:</p>
+      <ul>
+        <li>Stocks: ${stocks}%</li>
+        <li>Bonds: ${bonds}%</li>
+        <li>Real Estate: ${realEstate}%</li>
+        <li>Crypto: ${crypto}%</li>
+      </ul>`;
+        }
+
+        function simulateYear() {
+            year++;
+
+            let stockReturn = randomInRange(-0.15, 0.25);
+            let bondReturn = randomInRange(0.02, 0.07);
+            let realEstateReturn = randomInRange(0.01, 0.12);
+            let cryptoReturn = randomInRange(-0.40, 0.50);
+
+            const eventChance = Math.random();
+            let eventText = "";
+            if (eventChance < 0.2) {
+                const events = [
+                    {
+                        name: "Bull Market! Stocks surge +15%",
+                        apply: () => (stockReturn += 0.15),
+                    },
+                    {
+                        name: "Recession! Stocks & Real Estate drop -20%",
+                        apply: () => {
+                            stockReturn -= 0.20;
+                            realEstateReturn -= 0.20;
+                        },
+                    },
+                    {
+                        name: "Crypto Boom! Crypto +30%",
+                        apply: () => (cryptoReturn += 0.30),
+                    },
+                    {
+                        name: "Crypto Crash! Crypto -35%",
+                        apply: () => (cryptoReturn -= 0.35),
+                    },
+                    {
+                        name: "Bond Market Stable",
+                        apply: () => (bondReturn = bondReturn),
+                    },
+                ];
+                const event = events[Math.floor(Math.random() * events.length)];
+                event.apply();
+                eventText = `<p><strong>Event:</strong> ${event.name}</p>`;
+            }
+
+            let prevValue = portfolioValue;
+            portfolioValue =
+                prevValue *
+                (1 +
+                    (allocation.stocks * stockReturn +
+                        allocation.bonds * bondReturn +
+                        allocation.realEstate * realEstateReturn +
+                        allocation.crypto * cryptoReturn) /
+                    100);
+
+            history.push(portfolioValue);
+
+            resultDiv.innerHTML = `
+        <h3>Year ${year} Results</h3>
+        ${eventText}
+        <ul>
+          <li>Stocks Return: ${(stockReturn * 100).toFixed(2)}%</li>
+          <li>Bonds Return: ${(bondReturn * 100).toFixed(2)}%</li>
+          <li>Real Estate Return: ${(realEstateReturn * 100).toFixed(2)}%</li>
+          <li>Crypto Return: ${(cryptoReturn * 100).toFixed(2)}%</li>
+        </ul>
+        <h4>Portfolio Value: ₹${portfolioValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h4>
+        <h5>Growth This Year: ₹${(portfolioValue - prevValue).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
+      `;
+
+            portfolioChart.data.labels.push(`Year ${year}`);
+            portfolioChart.data.datasets[0].data.push(portfolioValue);
+            portfolioChart.update();
+
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const weights = Object.values(allocation);
+
+            function stdDev(arr) {
+                const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+                const sqDiffs = arr.map((x) => (x - mean) ** 2);
+                const avgSqDiff = sqDiffs.reduce((a, b) => a + b, 0) / arr.length;
+                return Math.sqrt(avgSqDiff);
+            }
+
+            const diversificationScore = 100 - stdDev(weights) * 10; // Rough scale
+            const riskLevel = calculateRiskLevel();
+
+            let diversificationText = "";
+            if (diversificationScore > 80) {
+                diversificationText = "Excellent diversification! Your portfolio is well balanced.";
+            } else if (diversificationScore > 50) {
+                diversificationText = "Good diversification, but consider spreading investments more evenly.";
+            } else {
+                diversificationText = "Low diversification. Your portfolio is concentrated and riskier.";
+            }
+
+            let riskText = "";
+            switch (riskLevel) {
+                case "Low":
+                    riskText =
+                        "Low risk portfolio: Expect steady but modest returns. Suitable for conservative investors.";
+                    break;
+                case "Medium":
+                    riskText =
+                        "Medium risk portfolio: Balanced approach between growth and stability.";
+                    break;
+                case "High":
+                    riskText =
+                        "High risk portfolio: Potential for high returns but with significant volatility.";
+                    break;
+            }
+
+            summaryDiv.innerHTML = `
+        <h3>Portfolio Summary</h3>
+        <p><strong>Diversification Score:</strong> ${diversificationScore.toFixed(1)}%</p>
+        <p>${diversificationText}</p>
+        <p><strong>Risk Level:</strong> ${riskLevel}</p>
+        <p>${riskText}</p>
+      `;
+        }
+
+        function calculateRiskLevel() {
+            const riskAssets = allocation.crypto + allocation.stocks;
+            if (riskAssets < 40) return "Low";
+            if (riskAssets <= 70) return "Medium";
+            return "High";
+        }
+
+        function resetGame() {
+            portfolioValue = 100000;
+            year = 0;
+            allocation = {};
+            history = [];
+
+            document.getElementById("stocks").value = 0;
+            document.getElementById("bonds").value = 0;
+            document.getElementById("realEstate").value = 0;
+            document.getElementById("crypto").value = 0;
+
+            updateSliders();
+
+            toggleInputs(true);
+
+            document.getElementById("nextYearBtn").disabled = true;
+            document.getElementById("resetBtn").disabled = true;
+
+            resultDiv.innerHTML = "";
+            summaryDiv.innerHTML = "";
+            portfolioChart.data.labels = [];
+            portfolioChart.data.datasets[0].data = [];
+            portfolioChart.update();
+        }
+
+        function toggleInputs(enabled) {
+            document.getElementById("stocks").disabled = !enabled;
+            document.getElementById("bonds").disabled = !enabled;
+            document.getElementById("realEstate").disabled = !enabled;
+            document.getElementById("crypto").disabled = !enabled;
+            document.getElementById("startBtn").disabled = !enabled;
+        }
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        updateSliders();
+    </script>
+</body>
+
+</html>

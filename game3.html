@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Flash Finance | FinanceX</title>
+</head>
+<style>
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 16px;
+        text-align: center;
+    }
+    .container h1 {
+        color: #264391;
+    }
+
+
+    button {
+        background-color: #264391;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        margin: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #1f336d;
+    }
+
+    #options button {
+        display: block;
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .info {
+        margin-top: 20px;
+    }
+
+
+    .controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    footer {
+        position: fixed;
+        bottom: 0%;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+    <div class="game-container">
+        <div class="container">
+            <h1>⚡ Flash Finance</h1>
+            <br>
+            <p>Choose the mode you wanna play !!</p>
+            <br>
+            <div class="mode-select">
+                <button onclick="startGame('timed')">Timed Mode ⏱️</button>
+                <button onclick="startGame('sudden')">Sudden Death 💀</button>
+                <div class="controls">
+                    <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+                </div>
+            </div>
+
+            <div id="game" class="hide">
+                <div id="question"></div>
+                <div id="options"></div>
+                <div class="info">
+                    <p>Score: <span id="score">0</span></p>
+                    <p id="timer"></p>
+                </div>
+            </div>
+
+            <div id="result" class="hide">
+                <h2 id="resultText"></h2>
+                <button onclick="location.reload()">Play Again</button>
+                <div class="controls">
+                    <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "What does 'APR' stand for?",
+                options: ["Annual Percentage Rate", "Average Personal Rate", "Advanced Payment Return", "Applied Profit Ratio"],
+                answer: "Annual Percentage Rate"
+            },
+            {
+                question: "A 'bull market' means prices are?",
+                options: ["Rising", "Falling", "Stable", "Unknown"],
+                answer: "Rising"
+            },
+            {
+                question: "True or False: A credit score affects your loan approval.",
+                options: ["True", "False"],
+                answer: "True"
+            },
+            {
+                question: "What is a mutual fund?",
+                options: ["A bank", "An insurance policy", "A pool of investments", "A crypto wallet"],
+                answer: "A pool of investments"
+            },
+            {
+                question: "Which of these is NOT a type of tax?",
+                options: ["Income Tax", "Water Tax", "Property Tax", "Sales Tax"],
+                answer: "Water Tax"
+            },
+            {
+                question: "What is an 'Asset' in financial terms?",
+                options: [
+                    "A type of tax",
+                    "Anything you own that has value",
+                    "A recurring expense",
+                    "A government bond"
+                ],
+                answer: "Anything you own that has value"
+            },
+            {
+                question: "What does 'Liability' refer to?",
+                options: [
+                    "An investment gain",
+                    "An asset you inherit",
+                    "Something you owe",
+                    "A type of income"
+                ],
+                answer: "Something you owe"
+            },
+            {
+                question: "How do you calculate 'Net Worth'?",
+                options: [
+                    "Assets plus expenses",
+                    "Liabilities plus savings",
+                    "Income minus taxes",
+                    "Total assets minus total liabilities"
+                ],
+                answer: "Total assets minus total liabilities"
+            },
+            {
+                question: "What is a 'Budget'?",
+                options: [
+                    "A plan for managing income and expenses",
+                    "A loan agreement",
+                    "An investment summary",
+                    "A credit score"
+                ],
+                answer: "A plan for managing income and expenses"
+            },
+            {
+                question: "Which best describes 'Compound Interest'?",
+                options: [
+                    "Interest only on principal amount",
+                    "Tax deducted on income",
+                    "Interest on both initial and earned interest",
+                    "One-time dividend"
+                ],
+                answer: "Interest on both initial and earned interest"
+            },
+            {
+                question: "What does 'Inflation' mean?",
+                options: [
+                    "Increase in money saved",
+                    "Decrease in loan interest",
+                    "The rise in prices over time",
+                    "Higher taxes for goods"
+                ],
+                answer: "The rise in prices over time"
+            },
+            {
+                question: "What is 'SIP (Systematic Investment Plan)'?",
+                options: [
+                    "A type of fixed deposit",
+                    "A loan repayment scheme",
+                    "Investing a fixed sum regularly in a mutual fund",
+                    "Government bond issue"
+                ],
+                answer: "Investing a fixed sum regularly in a mutual fund"
+            },
+            {
+                question: "What does 'NAV (Net Asset Value)' represent?",
+                options: [
+                    "Total assets of a company",
+                    "Value of a stock",
+                    "Price of one mutual fund unit",
+                    "Investment return percentage"
+                ],
+                answer: "Price of one mutual fund unit"
+            },
+            {
+                question: "Who is a 'Fund Manager'?",
+                options: [
+                    "Someone who sells insurance",
+                    "An expert managing mutual fund investments",
+                    "A bank officer handling savings accounts",
+                    "A financial auditor"
+                ],
+                answer: "An expert managing mutual fund investments"
+            },
+            {
+                question: "What does 'ROI (Return on Investment)' mean?",
+                options: [
+                    "Return given by government bonds",
+                    "Annual salary increment",
+                    "Percentage return from your investments",
+                    "Bank interest rate"
+                ],
+                answer: "Percentage return from your investments"
+            },
+            {
+                question: "What does 'XIRR' help calculate?",
+                options: [
+                    "Monthly expenses",
+                    "Tax deductions",
+                    "Returns on irregular investments like SIPs",
+                    "Loan repayment period"
+                ],
+                answer: "Returns on irregular investments like SIPs"
+            },
+            {
+                question: "What is 'AUM' in mutual funds?",
+                options: [
+                    "Average Unit Market",
+                    "Assets Under Management",
+                    "Annual Utility Measure",
+                    "Asset Usage Metric"
+                ],
+                answer: "Assets Under Management"
+            },
+            {
+                question: "What does 'Expense Ratio' represent?",
+                options: [
+                    "Fee charged on banking transactions",
+                    "Annual fee charged by the fund",
+                    "Return on investment",
+                    "Market volatility score"
+                ],
+                answer: "Annual fee charged by the fund"
+            },
+            {
+                question: "When is 'Exit Load' charged?",
+                options: [
+                    "At the time of SIP registration",
+                    "On switching between schemes",
+                    "For withdrawing money before a certain period",
+                    "Only for NPS withdrawals"
+                ],
+                answer: "For withdrawing money before a certain period"
+            },
+            {
+                question: "What is a 'Lock-in Period'?",
+                options: [
+                    "Loan repayment term",
+                    "Fixed deposit maturity date",
+                    "Duration you cannot withdraw investments",
+                    "Time when markets are closed"
+                ],
+                answer: "Duration you cannot withdraw investments"
+            },
+            {
+                question: "What is a 'Regular SIP'?",
+                options: [
+                    "Flexible investment plan",
+                    "Irregular one-time payment",
+                    "Fixed amount invested at fixed intervals",
+                    "Investment plan with exit load"
+                ],
+                answer: "Fixed amount invested at fixed intervals"
+            },
+            {
+                question: "What is 'Top-Up SIP' also called?",
+                options: [
+                    "One-time SIP",
+                    "Flexible SIP",
+                    "Step-Up SIP",
+                    "Lump Sum Plan"
+                ],
+                answer: "Step-Up SIP"
+            },
+            {
+                question: "What does a 'Flexible SIP' allow?",
+                options: [
+                    "Increase only",
+                    "Withdrawal anytime",
+                    "Changing amount based on cash flow",
+                    "Investment without returns"
+                ],
+                answer: "Changing amount based on cash flow"
+            },
+            {
+                question: "What is unique about a 'Perpetual SIP'?",
+                options: [
+                    "It runs without an end date",
+                    "Invested in real estate",
+                    "Locked for 10 years",
+                    "Only yearly payments allowed"
+                ],
+                answer: "It runs without an end date"
+            },
+            {
+                question: "When does a 'Trigger SIP' activate?",
+                options: [
+                    "On monthly salary credit",
+                    "Only at financial year-end",
+                    "Based on NAV or market conditions",
+                    "When mutual fund matures"
+                ],
+                answer: "Based on NAV or market conditions"
+            },
+            {
+                question: "What does 'Frequency' refer to in SIPs?",
+                options: [
+                    "How much money is invested",
+                    "How often investment is made",
+                    "SIP performance",
+                    "Fund manager rating"
+                ],
+                answer: "How often investment is made"
+            },
+            {
+                question: "What is 'Tenure' in SIP terms?",
+                options: [
+                    "Penalty charges",
+                    "Total duration of investment",
+                    "Interest rate",
+                    "Taxable income"
+                ],
+                answer: "Total duration of investment"
+            },
+            {
+                question: "What is a 'Goal-Based SIP' meant for?",
+                options: [
+                    "Short-term trading",
+                    "Buying stocks",
+                    "Achieving specific financial goals",
+                    "Loan repayment"
+                ],
+                answer: "Achieving specific financial goals"
+            },
+            {
+                question: "What is 'SWP (Systematic Withdrawal Plan)'?",
+                options: [
+                    "Investing money at intervals",
+                    "Withdrawing from mutual funds regularly",
+                    "Switching between stocks",
+                    "Taking a loan on SIPs"
+                ],
+                answer: "Withdrawing from mutual funds regularly"
+            },
+            {
+                question: "What does 'ELSS' stand for?",
+                options: [
+                    "Employee Linked Savings Scheme",
+                    "Equity-Linked Saving Scheme",
+                    "Electronic Loan Support System",
+                    "Earnings Lock Savings Scheme"
+                ],
+                answer: "Equity-Linked Saving Scheme"
+            },
+            {
+                question: "What is the function of an EMI Calculator?",
+                options: [
+                    "To calculate credit score",
+                    "To compare mutual funds",
+                    "To compute monthly loan payments",
+                    "To file income tax"
+                ],
+                answer: "To compute monthly loan payments"
+            },
+            {
+                question: "What is Form 49A used for?",
+                options: [
+                    "Applying for a duplicate PAN card",
+                    "Indian citizens applying for a new PAN card",
+                    "Linking PAN with Aadhaar",
+                    "Tracking PAN status"
+                ],
+                answer: "Indian citizens applying for a new PAN card"
+            },
+            {
+                question: "Which form is used by foreign nationals to apply for a PAN?",
+                options: [
+                    "Form 49A",
+                    "Form 60",
+                    "Form 15G",
+                    "Form 49AA"
+                ],
+                answer: "Form 49AA"
+            },
+            {
+                question: "When is PAN usage mandatory in banking?",
+                options: [
+                    "Any deposit below ₹10,000",
+                    "For online shopping",
+                    "Transactions above ₹50,000 and high-value investments",
+                    "For using ATM services"
+                ],
+                answer: "Transactions above ₹50,000 and high-value investments"
+            },
+            {
+                question: "Why is PAN-Aadhaar linking important?",
+                options: [
+                    "To open a credit card",
+                    "To validate PAN for financial use",
+                    "To increase bank interest rates",
+                    "To buy mutual funds"
+                ],
+                answer: "To validate PAN for financial use"
+            },
+            {
+                question: "What happens if PAN is not quoted for TDS?",
+                options: [
+                    "The transaction is blocked",
+                    "Higher TDS rates are applied",
+                    "The account is closed",
+                    "The loan is denied"
+                ],
+                answer: "Higher TDS rates are applied"
+            },
+            {
+                question: "What is a Bank Locker?",
+                options: [
+                    "A loan account",
+                    "A digital wallet",
+                    "A secure facility to store valuables",
+                    "A mutual fund account"
+                ],
+                answer: "A secure facility to store valuables"
+            },
+            {
+                question: "What is a Locker Agreement?",
+                options: [
+                    "A bond issued by the bank",
+                    "A document showing PAN details",
+                    "A contract outlining locker terms and conditions",
+                    "A loan guarantee"
+                ],
+                answer: "A contract outlining locker terms and conditions"
+            },
+            {
+                question: "Who can access a Joint Locker?",
+                options: [
+                    "Only the primary account holder",
+                    "Only the nominee",
+                    "Any bank customer",
+                    "Multiple holders as per operational mandate"
+                ],
+                answer: "Multiple holders as per operational mandate"
+            },
+            {
+                question: "What is a Custodian Key?",
+                options: [
+                    "A duplicate locker key",
+                    "A key used by the RBI",
+                    "A master key held by the bank",
+                    "A digital access card"
+                ],
+                answer: "A master key held by the bank"
+            },
+            {
+                question: "What is Safe Custody service?",
+                options: [
+                    "Locker rent payment",
+                    "Loan repayment plan",
+                    "Depositing valuables without renting a locker",
+                    "Tracking credit card usage"
+                ],
+                answer: "Depositing valuables without renting a locker"
+            },
+            {
+                question: "What is Form 60 used for?",
+                options: [
+                    "Applying for mutual funds",
+                    "Filing taxes",
+                    "Substitute for PAN when not available",
+                    "Registering for a loan"
+                ],
+                answer: "Substitute for PAN when not available"
+            },
+            {
+                question: "What is the purpose of a Security Deposit/FDR in lockers?",
+                options: [
+                    "To increase credit score",
+                    "To get a loan approved",
+                    "To act as collateral for locker rent dues",
+                    "To receive bonus interest"
+                ],
+                answer: "To act as collateral for locker rent dues"
+            },
+            {
+                question: "What does the RBI Locker Guidelines (2021) focus on?",
+                options: [
+                    "Increasing locker size",
+                    "Improving locker rent",
+                    "Enhancing safety and transparency in lockers",
+                    "Introducing digital locker keys"
+                ],
+                answer: "Enhancing safety and transparency in lockers"
+            },
+            {
+                question: "What does a Credit Score indicate?",
+                options: [
+                    "Your savings potential",
+                    "Your net worth",
+                    "Your creditworthiness",
+                    "Your tax liability"
+                ],
+                answer: "Your creditworthiness"
+            },
+            {
+                question: "What is an Economic Indicator?",
+                options: [
+                    "A loan term",
+                    "Data to assess economic health",
+                    "A bank account type",
+                    "A government tax"
+                ],
+                answer: "Data to assess economic health"
+            },
+            {
+                question: "What is an Escrow Account used for?",
+                options: [
+                    "Holding salary",
+                    "Temporary holding of funds until a condition is met",
+                    "Paying EMI",
+                    "Withdrawing cash overseas"
+                ],
+                answer: "Temporary holding of funds until a condition is met"
+            },
+            {
+                question: "What happens after the Ex-Dividend Date?",
+                options: [
+                    "You receive interest",
+                    "You get bonus shares",
+                    "You don’t get the dividend if you buy the stock",
+                    "Stock is delisted"
+                ],
+                answer: "You don’t get the dividend if you buy the stock"
+            },
+            {
+                question: "What does Exchange Rate mean?",
+                options: [
+                    "Bank transaction fee",
+                    "Rate of inflation",
+                    "Value of one currency compared to another",
+                    "Stock price"
+                ],
+                answer: "Value of one currency compared to another"
+            },
+            {
+                question: "What is a FICO Score used for?",
+                options: [
+                    "Calculating tax",
+                    "Creditworthiness in the U.S.",
+                    "Stock market investment",
+                    "Tracking inflation"
+                ],
+                answer: "Creditworthiness in the U.S."
+            },
+            {
+                question: "What is a Financial Year in India?",
+                options: [
+                    "January to December",
+                    "July to June",
+                    "April to March",
+                    "March to February"
+                ],
+                answer: "April to March"
+            },
+            {
+                question: "What is a Forex Market?",
+                options: [
+                    "Stock trading in India",
+                    "Real estate platform",
+                    "Market for currency exchange",
+                    "Online loan portal"
+                ],
+                answer: "Market for currency exchange"
+            },
+            {
+                question: "What is a Futures Contract?",
+                options: [
+                    "Fixed interest deposit",
+                    "Short-term loan",
+                    "Agreement to buy/sell later at a set price",
+                    "Stock buyback offer"
+                ],
+                answer: "Agreement to buy/sell later at a set price"
+            },
+            {
+                question: "What is Gross Income?",
+                options: [
+                    "After-tax salary",
+                    "Total income before deductions",
+                    "Investment returns",
+                    "Company net profit"
+                ],
+                answer: "Total income before deductions"
+            },
+            {
+                question: "Who is a Guarantor?",
+                options: [
+                    "A lender",
+                    "A mutual fund manager",
+                    "A person who repays if borrower defaults",
+                    "A tax consultant"
+                ],
+                answer: "A person who repays if borrower defaults"
+            },
+            {
+                question: "What is Idle Money?",
+                options: [
+                    "Invested cash",
+                    "Foreign currency",
+                    "Cash not earning any return",
+                    "Government bonds"
+                ],
+                answer: "Cash not earning any return"
+            },
+            {
+                question: "What does an Index Fund do?",
+                options: [
+                    "Lends money",
+                    "Tracks a market index",
+                    "Hedges currency",
+                    "Issues credit cards"
+                ],
+                answer: "Tracks a market index"
+            },
+            {
+                question: "What is a Joint Account?",
+                options: [
+                    "Account used for corporate payments",
+                    "Account owned by multiple people",
+                    "Account with a loan facility",
+                    "Account for minors only"
+                ],
+                answer: "Account owned by multiple people"
+            },
+            {
+                question: "What is Liquidity Ratio?",
+                options: [
+                    "Tax-to-income ratio",
+                    "Ability to repay long-term loans",
+                    "Ability to meet short-term obligations",
+                    "Inflation-adjusted return"
+                ],
+                answer: "Ability to meet short-term obligations"
+            },
+            {
+                question: "What does GAAP stand for?",
+                options: [
+                    "Government Authorized Accounting Policy",
+                    "Generally Accepted Accounting Principles",
+                    "Gross Annual Asset Protocol",
+                    "General Asset Allocation Plan"
+                ],
+                answer: "Generally Accepted Accounting Principles"
+            }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        let gameMode = '';
+        let timer;
+        let timeLeft = 60;
+
+        const gameEl = document.getElementById('game');
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const scoreEl = document.getElementById('score');
+        const resultEl = document.getElementById('result');
+        const resultText = document.getElementById('resultText');
+        const timerEl = document.getElementById('timer');
+
+        function startGame(mode) {
+            gameMode = mode;
+            document.querySelector('.mode-select').classList.add('hide');
+            gameEl.classList.remove('hide');
+            currentQ = 0;
+            score = 0;
+            scoreEl.innerText = score;
+
+            if (gameMode === 'timed') {
+                timeLeft = 60;
+                timerEl.innerText = `Time: ${timeLeft}s`;
+                timer = setInterval(() => {
+                    timeLeft--;
+                    timerEl.innerText = `Time: ${timeLeft}s`;
+                    if (timeLeft <= 0) endGame();
+                }, 1000);
+            }
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQ >= questions.length) {
+                currentQ = 0; 
+            }
+            const q = questions[currentQ];
+            questionEl.innerText = q.question;
+            optionsEl.innerHTML = '';
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(opt);
+                optionsEl.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(selected) {
+            const correct = questions[currentQ].answer;
+            if (selected === correct) {
+                score++;
+                scoreEl.innerText = score;
+                currentQ++;
+                showQuestion();
+            } else {
+                if (gameMode === 'sudden') {
+                    return endGame("Wrong Answer! Game Over.");
+                } else {
+                    currentQ++;
+                    showQuestion();
+                }
+            }
+        }
+
+        function endGame(msg = "Time's up!") {
+            clearInterval(timer);
+            gameEl.classList.add('hide');
+            resultEl.classList.remove('hide');
+            resultText.innerText = `${msg}\nYour Score: ${score}`;
+        }
+
+    </script>
+</body>
+
+</html>

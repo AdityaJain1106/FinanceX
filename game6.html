@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Mayhem | FinanceX</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .container h1 {
+            text-align: center;
+            color: #264391;
+        }
+
+        .news,
+        .assets,
+        .actions,
+        .summary {
+            margin-bottom: 20px;
+        }
+
+        .news-card {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 5px solid #2196f3;
+            border-radius: 5px;
+        }
+
+        .assets-table,
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .assets-table th,
+        .assets-table td,
+        .summary-table th,
+        .summary-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buy {
+            background: #4caf50;
+            color: white;
+        }
+
+        .sell {
+            background: #f44336;
+            color: white;
+        }
+
+        .hold {
+            background: #9e9e9e;
+            color: white;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto 30px;
+            padding: 10px 20px;
+            font-weight: 700;
+            background: #264391;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #264391;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav class="navbar">
+            <div class="logo">FinanceX</div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="learnzone.html">LearnZone</a></li>
+                <li><a href="news.html">LiveAnalytics</a></li>
+                <li><a href="filter.html">DecideX</a></li>
+                <li><a href="smartcalc.html">SmartCal-C</a></li>
+                <li><a href="chatbot.html">FinSight</a></li>
+                <li class="mobile-profile"><a href="profile.html">Profile</a></li>
+            </ul>
+            <div class="profile-icon">
+                <div class="dropdown">
+                    <img src="https://img.icons8.com/ios-filled/35/ffffff/language.png" alt="Language">
+
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">Spanish</a>
+                        <a href="#">French</a>
+                        <a href="#">German</a>
+                        <a href="#">Hindi</a>
+                    </div>
+                </div>
+                <a href="profile.html"><img src="https://img.icons8.com/ios-filled/24/ffffff/user.png"
+                        alt="Profile"></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+
+    <br>
+
+
+    <div class="container">
+        <h1>📈 Market Mayhem</h1>
+        <br>
+        <div class="news">
+            <div class="news-card" id="newsFlash">Loading market news...</div>
+        </div>
+        <div class="assets">
+            <table class="assets-table" id="assetsTable">
+                <thead>
+                    <tr>
+                        <th>Asset</th>
+                        <th>Price</th>
+                        <th>Holdings</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="summary">
+            <h3>💰 Portfolio Summary</h3>
+            <br>
+            <p>Cash: ₹<span id="cash">100000</span></p>
+            <br>
+            <p>Total Value: ₹<span id="totalValue">100000</span></p>
+        </div>
+        <div class="controls">
+            <a href="learnzone.html"><button id="exitBtn">Exit to LearnZone</button></a>
+        </div>
+    </div>
+
+    <br>
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="termsandcondition.html">Terms of Use</a>
+            <a href="pricavypolicy.html">Privacy Policy</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="FAQ.HTML">FAQ</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+        <div class="footer-right">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Facebook"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Twitter"></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const assets = [
+            { name: 'Tech Stock', price: 1000, holdings: 0 },
+            { name: 'CryptoCoin', price: 500, holdings: 0 },
+            { name: 'Gov Bond', price: 200, holdings: 0 },
+            { name: 'RealEstate Fund', price: 1500, holdings: 0 },
+        ];
+
+        const newsPool = [
+            { text: 'Tech sector booms with AI growth!', affect: { 'Tech Stock': 1.15 } },
+            { text: 'Crypto market suffers regulatory blow.', affect: { 'CryptoCoin': 0.7 } },
+            { text: 'Government cuts bond interest rates.', affect: { 'Gov Bond': 0.85 } },
+            { text: 'Real estate values climb due to demand.', affect: { 'RealEstate Fund': 1.2 } },
+            { text: 'Recession fears shake the markets.', affect: { 'Tech Stock': 0.9, 'CryptoCoin': 0.85, 'Gov Bond': 1.05 } }
+        ];
+
+        let cash = 100000;
+        let round = 0;
+
+        function renderAssets() {
+            const tbody = document.querySelector('#assetsTable tbody');
+            tbody.innerHTML = '';
+            assets.forEach(asset => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+          <td>${asset.name}</td>
+          <td>₹${asset.price}</td>
+          <td>${asset.holdings}</td>
+          <td>
+            <button class="btn buy" onclick="buy('${asset.name}')">Buy</button>
+            <button class="btn sell" onclick="sell('${asset.name}')">Sell</button>
+          </td>`;
+                tbody.appendChild(row);
+            });
+            document.getElementById('cash').innerText = Math.round(cash);
+            updateTotal();
+        }
+
+        function buy(name) {
+            const asset = assets.find(a => a.name === name);
+            if (cash >= asset.price) {
+                asset.holdings++;
+                cash -= asset.price;
+                renderAssets();
+            }
+        }
+
+        function sell(name) {
+            const asset = assets.find(a => a.name === name);
+            if (asset.holdings > 0) {
+                asset.holdings--;
+                cash += asset.price;
+                renderAssets();
+            }
+        }
+
+        function updateTotal() {
+            let total = cash;
+            assets.forEach(asset => {
+                total += asset.price * asset.holdings;
+            });
+            document.getElementById('totalValue').innerText = Math.round(total);
+        }
+
+        function nextRound() {
+            if (round >= 10) {
+                alert("Market day over! Check your portfolio.");
+                return;
+            }
+            round++;
+            const news = newsPool[Math.floor(Math.random() * newsPool.length)];
+            document.getElementById('newsFlash').innerText = `Round ${round}/10: ${news.text}`;
+            for (let asset of assets) {
+                const factor = news.affect[asset.name] || (1 + (Math.random() * 0.1 - 0.05));
+                asset.price = Math.max(50, Math.round(asset.price * factor));
+            }
+            renderAssets();
+        }
+
+        setInterval(nextRound, 15000);
+        renderAssets();
+        nextRound();
+    </script>
+</body>
+
+</html>
