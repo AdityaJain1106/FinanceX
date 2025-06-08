@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <title>FinanceX</title>
     <style>
-
         main {
             margin: 20px 60px;
         }
@@ -21,7 +20,7 @@
             background-repeat: no-repeat, repeat;
             background-position: center;
             background-size: cover;
-            height: 100vh;
+            height: 91vh;
             width: 100%;
             color: aliceblue;
             justify-content: center;
@@ -70,13 +69,12 @@
             cursor: pointer;
             transition: 0.3s;
             display: flex;
-            align-items: center;
             justify-content: flex-start;
         }
 
         .right-btn {
             position: absolute;
-            bottom: 0px;
+            bottom: 10px;
             right: 40px;
             display: flex;
             justify-content: flex-end;
@@ -117,12 +115,13 @@
             font-size: 32px;
         }
 
-        .section-two-img img {
+        .section-two-img video {
             height: auto;
             display: block;
             margin: auto;
-            width: 80%;
+            width: 100%;
             max-width: 600px;
+            border-radius: 10px;
         }
 
         .buttons-wrapper {
@@ -334,7 +333,7 @@
 
         .form-section h2 {
             margin-bottom: 20px;
-            color: #2c3e50;
+            color: #264391;
         }
 
         label {
@@ -353,7 +352,7 @@
         }
 
         .section-four button {
-            background-color: #111f42;
+            background-color: #264391;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -524,7 +523,11 @@
 <body>
     <div>
         <nav class="navbar">
-            <div class="logo">FinanceX</div>
+            <div>
+                <a href="https://financesx.netlify.app/">
+                    <div class="logo">FinanceX</div>
+                </a>
+            </div>
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="learnzone.html">LearnZone</a></li>
@@ -596,16 +599,18 @@
         <h2>Join thousands taking control of their financial future with insights, tools, and real-time data.</h2>
         <br>
         <div class="buttons-wrapper">
-            <button onclick="changeImage(0)">Knowledge</button>
-            <button onclick="changeImage(1)">Analytics</button>
-            <button onclick="changeImage(2)">Compare</button>
-            <button onclick="changeImage(3)">Calculate</button>
-            <button onclick="changeImage(4)">Chatbot</button>
+            <button onclick="changeVideo(0)">Knowledge</button>
+            <button onclick="changeVideo(1)">Analytics</button>
+            <button onclick="changeVideo(2)">Compare</button>
+            <button onclick="changeVideo(3)">Calculate</button>
+            <button onclick="changeVideo(4)">Chatbot</button>
         </div>
 
         <div class="section-two-img">
-            <img id="displayImage" src="img/A young man is writing a letter. The background is.webp"
-                alt="Feature Image">
+            <video id="displayVideo" autoplay muted loop playsinline>
+                <source src="img/v2.mkv" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         <div class="section-two-btn">
@@ -793,20 +798,20 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        const images = [
-            "img/A young man is writing a letter. The background is.webp",
-            "img/Create an image showcasing a bustling digital mark.webp",
-            "img/A monthly savings chart with increasing bars.webp",
-            "img/Generate design concepts for a web app that combin.webp",
-            "img/question mark on black background.webp"
+        const videoSources = [
+            "img/v2.mkv",
+            "img/v1.mp4",
+            "videos/compare.mp4",
+            "img/v3.mp4",
+            "videos/chatbot.mp4"
         ];
 
         const exploreTexts = [
-            "Discover Key Terms",
-            "View Live Analytics",
-            "Compare Financial Products",
-            "Use Smart Calculators",
-            "Ask Financial Questions"
+            "Explore Knowledge",
+            "Explore Analytics",
+            "Explore Compare",
+            "Explore Calculator",
+            "Explore Chatbot"
         ];
 
         const exploreLinks = [
@@ -817,19 +822,18 @@
             "https://financesx.netlify.app/chatbot"
         ];
 
-        function changeImage(index) {
-            const imgElement = document.getElementById("displayImage");
+        function changeVideo(index) {
+            const videoElement = document.getElementById("displayVideo");
+            const sourceElement = videoElement.querySelector("source");
             const exploreBtn = document.getElementById("exploreBtn");
 
-            imgElement.src = images[index];
+            sourceElement.src = videoSources[index];
+            videoElement.load();
+            videoElement.play();
+
             exploreBtn.textContent = exploreTexts[index];
             exploreBtn.onclick = () => window.location.href = exploreLinks[index];
         }
-
-        // function changeImage(index) {
-        //     const imgElement = document.getElementById("displayImage");
-        //     imgElement.src = images[index];
-        // }
 
         var swiper = new Swiper(".slide-content", {
             slidesPerView: 3,

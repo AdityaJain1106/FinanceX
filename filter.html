@@ -46,19 +46,24 @@
             display: none;
         }
 
+        .main-sub-heading{
+            text-align: center;
+        }
+
 
         .main-heading2 {
             text-align: center;
             color: #264391;
+            padding-top: 10px;
         }
 
         #searchBar {
             padding: 10px;
-            width: 300px;
+            width: 280px;
             font-size: 16px;
             border: 2px solid #264391;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .bank-container {
@@ -179,11 +184,6 @@
         }
 
         @media screen and (max-width: 768px) and (min-width: 540px) {
-            .bank-container {
-                height: 1200px;
-                overflow-x: auto;
-            }
-
             .table-class {
                 height: 1200px;
                 overflow-x: auto;
@@ -192,10 +192,12 @@
             .bank-container {
                 display: flex;
                 justify-content: space-evenly;
-                margin: 20px 0px;
                 flex-wrap: wrap;
                 flex-direction: row;
                 gap: 20px;
+                height: 1200px;
+                overflow-x: auto;
+                margin: 40px 0px 20px 0px;
             }
         }
 
@@ -203,6 +205,7 @@
             .bank-container {
                 height: 800px;
                 overflow-x: auto;
+                margin: 40px 0px 20px 0px;
             }
 
             .table-class {
@@ -226,7 +229,11 @@
 
     <div>
         <nav class="navbar">
-            <div class="logo">FinanceX</div>
+            <div>
+                <a href="https://financesx.netlify.app/">
+                    <div class="logo">FinanceX</div>
+                </a>
+            </div>
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="learnzone.html">LearnZone</a></li>
@@ -264,11 +271,16 @@
 
         <div class="filter-div1">
             <h1 class="main-heading">Bank Comparison Portal</h1>
+            <div class="main-sub-heading">
+                <p>Click "Compare" and select banks to compare. Click a bank's image for more details.</p>
+
+                    </div>
             <div class="main-heading2">
                 <input type="text" id="searchBar" placeholder="Search for a bank...">
                 <button id="compareBtn">Compare</button>
             </div>
-            <div class="bank-container" id="banks"></div>
+            <div class="bank-container" id="banks">
+            </div>
             <div id="overlay"></div>
             <div id="dialog">
                 <h3>Bank Comparison</h3>
