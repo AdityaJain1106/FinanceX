@@ -46,7 +46,7 @@
             display: none;
         }
 
-        .main-sub-heading{
+        .main-sub-heading {
             text-align: center;
         }
 
@@ -274,7 +274,7 @@
             <div class="main-sub-heading">
                 <p>Click "Compare" and select banks to compare. Click a bank's image for more details.</p>
 
-                    </div>
+            </div>
             <div class="main-heading2">
                 <input type="text" id="searchBar" placeholder="Search for a bank...">
                 <button id="compareBtn">Compare</button>
@@ -422,18 +422,70 @@
             "State Bank of India": "https://www.onlinesbi.sbi/",
             "Bank of Baroda": "https://www.bankofbaroda.in/",
             "Bank of India": "https://www.bankofindia.co.in/",
-            "Canara Bank": "https://www.canarabank.com/"
+            "Canara Bank": "https://www.canarabank.com/",
+            "Punjab National Bank": "https://www.pnbindia.in/",
+            "HDFC Bank": "https://www.hdfcbank.com/",
+            "ICICI Bank": "https://www.icicibank.com/",
+            "Axis Bank": "https://www.axisbank.com/",
+            "Kotak Mahindra Bank": "https://www.kotak.com/",
+            "IndusInd Bank": "https://www.indusind.com/",
+            "Yes Bank": "https://www.yesbank.in/",
+            "Federal Bank": "https://www.federalbank.co.in/",
+            "IDFC FIRST Bank": "https://www.idfcfirstbank.com/",
+            "Bandhan Bank": "https://www.bandhanbank.com/",
+            "RBL Bank": "https://www.rblbank.com/",
+            "South Indian Bank": "https://www.southindianbank.com/",
+            "City Union Bank": "https://www.cityunionbank.com/",
+            "Karur Vysya Bank": "https://www.kvb.co.in/",
+            "Dhanlaxmi Bank": "https://www.dhanbank.com/",
+            "CSB Bank": "https://www.csb.co.in/",
+            "Jammu & Kashmir Bank": "https://www.jkbank.com/",
+            "Nainital Bank": "https://www.nainitalbank.co.in/",
+            "Union Bank of India": "https://www.unionbankofindia.co.in/",
+            "Indian Bank": "https://www.indianbank.in/",
+            "Indian Overseas Bank": "https://www.iob.in/",
+            "UCO Bank": "https://www.ucobank.com/",
+            "Bank of Maharashtra": "https://www.bankofmaharashtra.in/",
+            "Central Bank of India": "https://www.centralbankofindia.co.in/",
+            "Punjab & Sind Bank": "https://www.punjabandsindbank.co.in/",
+            "Citibank": "https://www.citibank.co.in/",
+            "Standard Chartered Bank": "https://www.sc.com/in/",
+            "HSBC": "https://www.hsbc.co.in/",
+            "Deutsche Bank": "https://www.db.com/india",
+            "Barclays Bank": "https://www.barclays.co.in/",
+            "BNP Paribas": "https://www.bnpparibas.co.in/",
+            "Bank of America": "https://www.bankofamerica.com/",
+            "DBS Bank India": "https://www.dbs.com/in/",
+            "United Overseas Bank": "https://www.uobgroup.com/in/index.page",
+            "Shinhan Bank": "https://www.shinhanbankindia.com/",
+            "Mizuho Bank": "https://www.mizuhobank.com/",
+            "Credit Suisse AG": "https://www.credit-suisse.com/",
+            "Sberbank": "https://www.sberbank.com/",
+            "UBS AG": "https://www.ubs.com/",
+            "FirstRand Bank": "https://www.firstrand.co.za/",
+            "Commonwealth Bank of Australia": "https://www.commbank.com.au/",
+            "AU Small Finance Bank": "https://www.aubank.in/",
+            "Equitas Small Finance Bank": "https://www.equitasbank.com/",
+            "Ujjivan Small Finance Bank": "https://www.ujjivansfb.in/",
+            "Jana Small Finance Bank": "https://www.janabank.com/",
+            "Suryoday Small Finance Bank": "https://www.suryodaybank.com/",
+            "Utkarsh Small Finance Bank": "https://www.utkarsh.bank/",
+            "ESAF Small Finance Bank": "https://www.esafbank.com/",
+            "Fincare Small Finance Bank": "https://www.fincarebank.com/",
+            "North East Small Finance Bank": "https://www.nesfb.in/",
+            "Shivalik Small Finance Bank": "https://shivalikbank.com/",
+            "Unity Small Finance Bank": "https://www.theunitybank.com/"
         };
 
         document.addEventListener("DOMContentLoaded", () => {
             const bankImages = document.querySelectorAll("#banks img");
 
             bankImages.forEach(img => {
-                const bankName = img.alt?.trim(); // image should have alt="State Bank of India" etc.
+                const bankName = img.alt?.trim(); 
                 if (bankImageLinks[bankName]) {
                     img.style.cursor = "pointer";
                     img.addEventListener("click", (e) => {
-                        e.stopPropagation(); // prevent box click if any
+                        e.stopPropagation();
                         window.open(bankImageLinks[bankName], "_blank");
                     });
                 }
@@ -475,7 +527,7 @@
         tagSelect.addEventListener("change", renderTable);
         searchInput.addEventListener("input", renderTable);
 
-        renderTable(); // Initial render
+        renderTable();
     </script>
     <script src="script.js"></script>
     <script src="script3.js"></script>
