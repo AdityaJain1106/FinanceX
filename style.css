@@ -232,3 +232,19 @@ a {
     justify-content: center;
     gap: 15px;
 }
+
+.hplay {
+    background-color: #264391;
+    color: white;
+    max-width: 600px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 20px;
+}
+
+.hplay ul {
+    list-style: none;
+}

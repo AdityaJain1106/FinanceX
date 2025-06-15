@@ -16,6 +16,7 @@
         border-radius: 16px;
         text-align: center;
     }
+
     .container h1 {
         color: #264391;
     }
@@ -57,6 +58,7 @@
         justify-content: center;
         gap: 15px;
     }
+
     footer {
         position: fixed;
         bottom: 0%;
@@ -68,7 +70,9 @@
     <div>
         <nav class="navbar">
             <div>
-                <a href="https://financesx.netlify.app/"><div class="logo">FinanceX</div></a>
+                <a href="https://financesx.netlify.app/">
+                    <div class="logo">FinanceX</div>
+                </a>
             </div>
 
             <ul class="nav-links" id="navLinks">
@@ -101,11 +105,25 @@
             </div>
         </nav>
     </div>
+    <br>
+    <div style="display: flex; justify-content: center; align-self: center;">
+        <div class="hplay">
+            <h1>Instructions - How to Play</h1>
+            <ul>
+                <li>1. A series of rapid-fire finance questions will appear on screen.</li>
+                <li>2. Choose the correct option before the countdown ends.</li>
+                <li>3. Each correct answer increases your score and speed bonus.</li>
+                <li>4. Aim for streaks and high scores without running out of time.</li>
+            </ul>
+        </div>
+    </div>
 
     <br>
     <div class="game-container">
         <div class="container">
             <h1>⚡ Flash Finance</h1>
+            <br>
+            <p>Choose the correct answer to each rapid-fire financial question before time’s up!</p>
             <br>
             <p>Choose the mode you wanna play !!</p>
             <br>
@@ -768,7 +786,7 @@
 
         function showQuestion() {
             if (currentQ >= questions.length) {
-                currentQ = 0; 
+                currentQ = 0;
             }
             const q = questions[currentQ];
             questionEl.innerText = q.question;
